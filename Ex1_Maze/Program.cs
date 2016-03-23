@@ -12,6 +12,7 @@ namespace Ex1_Maze
         {
             Console.WriteLine("Starting Program");
             Console.ReadLine();
+            Console.WriteLine("Closing Program");
         }
     }
 }
