@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    interface ICreateable
+    class Dfs : ICreater
     {
-        int getType();
-        int getColums();
-        int getRows();
+        void create(ICreateable createable)
+        {
 
+        }
     }
 }
