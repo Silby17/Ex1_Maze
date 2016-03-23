@@ -11,6 +11,7 @@ namespace Ex1_Maze
         static void Main(string[] args)
         {
             Console.WriteLine("Starting Program");
+            Console.ReadLine();
         }
     }
 }
