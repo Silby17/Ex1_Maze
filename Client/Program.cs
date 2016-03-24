@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -12,44 +13,27 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Starting Client");
-            byte[] data = new byte[1024];
-            string input, stringData;
-                       
-
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80);
-            Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Console.WriteLine("Client Started");
+            
             try
             {
-                server.Connect(ipep);
+                TcpClient client = new TcpClient("127.0.0.1", 80);
+
+                NetworkStream ns = client.GetStream();
+
+                byte[] bytes = new byte[1024];
+                int bytesRead = ns.Read(bytes, 0, bytes.Length);
+
+                Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRead));
+
+                client.Close();
+
             }
-            catch (SocketException e)
+            catch (Exception e)
             {
-                Console.WriteLine("Unable to connect to server.");
                 Console.WriteLine(e.ToString());
-                return;
             }
-
-
-            int recv = server.Receive(data);
-            stringData = Encoding.ASCII.GetString(data, 0, recv);
-            Console.WriteLine("From Server: " + stringData);
-
-            while (true)
-            {
-                input = Console.ReadLine();
-                if (input == "exit") break;
-
-                server.Send(Encoding.ASCII.GetBytes(input));
-                data = new byte[1024];
-                recv = server.Receive(data);
-                stringData = Encoding.ASCII.GetString(data, 0, recv);
-                Console.WriteLine(stringData);
-            }
-            Console.WriteLine("Disconnecting from server...");
-            server.Shutdown(SocketShutdown.Both);
-            server.Close();
-
+            Console.ReadLine();
         }
     }
 }
