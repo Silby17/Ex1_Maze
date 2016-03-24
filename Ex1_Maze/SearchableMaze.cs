@@ -4,25 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
     class SearchableGrid : ISearchable
     {
         private Maze currentGrid;
 
-        //public getGoal...will use methods of givven maze
-        //public getEntry....
-        public List<ConsoleApplication3.State<T> getAllPossibleStates(ConsoleApplication3.State<T> s)
+        public List<State> getAllPossibleStates(State s)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public State<T> getGoalState()
         {
             throw new NotImplementedException();
         }
 
-        public ConsoleApplication3.State<T> getGoalState()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ConsoleApplication3.State<T> getInitialState()
+        public State<T> getInitialState()
         {
             throw new NotImplementedException();
         }
