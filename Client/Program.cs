@@ -14,26 +14,37 @@ namespace Client
         static void Main(string[] args)
         {
             Console.WriteLine("Client Started");
-            
+            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            int PORT = 80;
+
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), PORT);
+            Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
             try
             {
-                TcpClient client = new TcpClient("127.0.0.1", 80);
+                server.Connect(ipep);
+                Console.WriteLine("Here 1");
+                byte[] data = new byte[1024];
+                int recv = server.Receive(data);
+                string stringData = Encoding.ASCII.GetString(data, 0, recv);
+                Console.WriteLine(stringData);
 
-                NetworkStream ns = client.GetStream();
-
-                byte[] bytes = new byte[1024];
-                int bytesRead = ns.Read(bytes, 0, bytes.Length);
-
-                Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRead));
-
-                client.Close();
-
+                while (true)
+                {
+                    Console.WriteLine("Here 2 ");
+                    Console.WriteLine("enter");
+                    string input = Console.ReadLine();
+                    if (input == "exit") break;
+                    server.Send(Encoding.ASCII.GetBytes(input));
+                   // byte[] data = new byte[1024];
+                    //int recv = server.Receive(data);
+                    stringData = Encoding.ASCII.GetString(data, 0, recv);
+                    Console.WriteLine(stringData);
+                }
+                server.Shutdown(SocketShutdown.Both);
+                server.Close();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
+            catch (SocketException e) { Console.WriteLine("Unable to connect to server." + e.ToString()); }
         }
     }
 }
