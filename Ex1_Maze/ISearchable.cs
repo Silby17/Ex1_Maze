@@ -12,7 +12,8 @@ namespace Ex1_Maze
         State<T> getInitialState();
         State<T> getGoalState();
         List<State<T>> getAllPossibleStates(State<T> s);
-        
+        object getIGoallState();
+        List<State<T>> getAllPossibleStates();
     }
 
 }

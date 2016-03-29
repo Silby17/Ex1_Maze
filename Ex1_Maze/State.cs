@@ -16,6 +16,20 @@ namespace Ex1_Maze
         {
             this.state = state;
         }
+        public State()    // CTOR
+        {
+           
+        }
+
+        public double GetCost()
+        {
+            return this.cost;
+        }
+
+        public void SetCost(double cost)
+        {
+            this.cost = cost;
+        }
 
         public override bool Equals(object obj) // we override Object's Equals method
         {

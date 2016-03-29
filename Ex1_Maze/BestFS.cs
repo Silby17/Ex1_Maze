@@ -29,16 +29,17 @@ namespace Ex1_Maze
             while (getNumberOfNodesEvaluated() > 0)
             {
                 // inherited from Searcher, removes the best state
-                State<T> n = popOpenList();  
-                closed.Add(n);
-                if (n.Equals(searchable.getIGoallState()))
+                State<T> bestState = popOpenList();
+                this.closedList.AddSolution(bestState);
+                if (bestState.Equals(searchable.getIGoallState()))
                     return backTrace(); // private method, back traces through the parents
                                         // calling the delegated method, returns a list of states with n as a parent
-                List<State<T>> succerssors = searchable.getAllPossibleStates(n);
+                List<State<T>> succerssors = searchable.getAllPossibleStates();
                 foreach (State<T> s in succerssors)
                 {
-                    if (!closed.Contains(s) && !openContaines(s))
+                    if (!this.closedList.Containe(s) && !this.openList.Containe(s))
                     {
+                        
                         // s.setCameFrom(n);  // already done by getSuccessors
                         addToOpenList(s);
                     }
@@ -51,15 +52,42 @@ namespace Ex1_Maze
             }
             throw new NotImplementedException();
         }
+        //returns the path
+        private Solution<T> backTrace()
+        {   //needs to go over all the states from goal to start and ask where did it "comefrom"
+            throw new NotImplementedException();
+        }
 
+        //pop the best state (lowest move)
+        private State<T> popOpenList()
+        {
+            State<T> ans = new State<T>();
+            ans.SetCost(100000);
+            foreach (State<T> s in this.openList.GetList())
+            {
+                if (s.GetCost() <= ans.GetCost())
+                    ans = s;
+            }
+            throw new NotImplementedException();
+        }
+        //adds a state to the openList
         private void addToOpenList(State<T> state)
         {
-            this.openList.Add(state);
+            this.openList.GetList().Add(state);
             throw new NotImplementedException();
         
         }
-
+        //adds a  List of states to the openList
         public void addToOpenList(List<State<T>> list)
+        {   
+            foreach(State<T> s in list)
+            {
+                this.addToOpenList(s);
+            }
+            throw new NotImplementedException();
+        }
+
+        State<T> ISearcher<T>.popOpenList()
         {
             throw new NotImplementedException();
         }

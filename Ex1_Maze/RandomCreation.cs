@@ -12,5 +12,10 @@ namespace Ex1_Maze
         {
             throw new NotImplementedException();
         }
+
+        internal static int[] getStartEndPoints(int height, int width)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
