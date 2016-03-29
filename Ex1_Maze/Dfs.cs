@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    public class Dfs: ICreater
+    public class Dfs<T>: ICreater<T>
     {
         public int height;
         public int width;
         public Node[,] maze;
 
-        public Node[,] create(ICreateable createable)
+        public Node[,] create(ICreateable<T> createable)
         {
             // throw new NotImplementedException();
 
@@ -29,7 +29,7 @@ namespace Ex1_Maze
                 }
                  
 
-            int[] startEnd = RandomCreation.getStartEndPoints(height, width);
+            int[] startEnd = RandomCreation<T>.getStartEndPoints(height, width);
             int start = startEnd[0];
             int end = startEnd[1];
 

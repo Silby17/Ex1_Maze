@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    public interface ICreater
+    public interface ICreater<T>
     {
-        Node[,] create(ICreateable createable);
+        Node[,] create(ICreateable<T> createable);
     }
 }

@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    public class BestFS<T> : ISearcher
+    public class BestFS<T> : ISearcher<T>
     {
         private Node[,] maze;
-        private Solution<T> closedList;
-        private Solution<T> openList;
+        private List<Solution<T>> closedList;
+        private List<Solution<T>> openList;
 
         public int getNumberOfNodesEvaluated()
         {
-            return this.closedList.GetLength();
+            return this.closedList.Count;
             throw new NotImplementedException();
         }
 
-        public override Solution<T> Search(ISearchable<T> searchable)
+        public Solution<T> Search(ISearchable<T> searchable)
         {
-            this.closedList = new List<Solution<T>>;
+            this.closedList = new List<Solution<T>>();
             throw new NotImplementedException();
             // Searcher's abstract method overriding
             addToOpenList(searchable.getInitialState()); // inherited from Searcher
@@ -47,11 +47,6 @@ namespace Ex1_Maze
                     }
                 }
             }
-        }
-
-        Solution<T> ISearcher.Search(ISearchable searchable)
-        {
-            throw new NotImplementedException();
         }
     }
 }

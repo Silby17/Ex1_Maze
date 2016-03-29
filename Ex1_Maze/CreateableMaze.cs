@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    public  class CreateableMaze : ICreateable
+    public  class CreateableMaze<T> : ICreateable<T>
     {
     //  public Node[,] maze;
         public int height;
@@ -35,7 +35,7 @@ namespace Ex1_Maze
             return this.width;
         }
 
-        int ICreateable.GetType()
+        int ICreateable<T>.GetType()
         {
             return this.type;
 

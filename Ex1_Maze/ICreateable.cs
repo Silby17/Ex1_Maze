@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    public interface ICreateable
+    public interface ICreateable<T>
     {
         int GetType();
         int GetHeight();
