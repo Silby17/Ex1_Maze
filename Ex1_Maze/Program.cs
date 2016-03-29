@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex1_Maze
+namespace ConsoleApplication3
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Starting Program");
-            Console.ReadLine();
-            Console.WriteLine("Closing Program");
+            Dfs D = new Dfs();
+            CreateableMaze maze = new CreateableMaze(5, 5, 1);
+            D.create(maze);
+            string user = Console.ReadLine();
         }
     }
 }
