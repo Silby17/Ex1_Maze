@@ -9,25 +9,27 @@ namespace Ex1_Maze
     public class BestFS<T> : ISearcher<T>
     {
         private Node[,] maze;
-        private List<Solution<T>> closedList;
-        private List<Solution<T>> openList;
+        private Solution<T> closedList;
+        private Solution<T> openList;
 
         public int getNumberOfNodesEvaluated()
         {
-            return this.closedList.Count;
+            return this.closedList.GetLength();
             throw new NotImplementedException();
         }
 
         public Solution<T> Search(ISearchable<T> searchable)
         {
-            this.closedList = new List<Solution<T>>();
-            throw new NotImplementedException();
+            this.closedList = new Solution<T>(new List<State<T>>());
+            this.openList = new Solution<T>(new List<State<T>>());
+
             // Searcher's abstract method overriding
-            addToOpenList(searchable.getInitialState()); // inherited from Searcher
-            HashSet<State<T>> closed = new HashSet<State<T>>();
-            while (OpenListSize > 0)
+            addToOpenList(searchable.getInitialState()); 
+          //  HashSet<State<T>> closed = new HashSet<State<T>>();
+            while (getNumberOfNodesEvaluated() > 0)
             {
-                State<T> n = popOpenList();  // inherited from Searcher, removes the best state
+                // inherited from Searcher, removes the best state
+                State<T> n = popOpenList();  
                 closed.Add(n);
                 if (n.Equals(searchable.getIGoallState()))
                     return backTrace(); // private method, back traces through the parents
@@ -47,6 +49,19 @@ namespace Ex1_Maze
                     }
                 }
             }
+            throw new NotImplementedException();
+        }
+
+        private void addToOpenList(State<T> state)
+        {
+            this.openList.Add(state);
+            throw new NotImplementedException();
+        
+        }
+
+        public void addToOpenList(List<State<T>> list)
+        {
+            throw new NotImplementedException();
         }
     }
 }
