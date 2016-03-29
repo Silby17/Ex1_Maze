@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
-    class Solution <T>
+    public class Solution <T>
     {
         private List<State<T>> list;
 

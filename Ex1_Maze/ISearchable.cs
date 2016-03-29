@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+
+namespace Ex1_Maze
 {
-    public interface ISearchable
+    public interface ISearchable<T>
     {
-        
         State<T> getInitialState();
         State<T> getGoalState();
-        List<State> getAllPossibleStates(State s);
+        List<State<T>> getAllPossibleStates(State<T> s);
         
     }
 

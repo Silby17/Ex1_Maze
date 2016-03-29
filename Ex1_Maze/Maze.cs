@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
     //This is a base form of a grid maze.
-    class Maze
+    public class Maze
     {
         private Node[,] grid2D;
         public Maze(int n, int m)

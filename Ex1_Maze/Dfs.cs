@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
-    class Dfs: ICreater
+    public class Dfs: ICreater
     {
         public int height;
         public int width;

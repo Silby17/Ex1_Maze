@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
-    class CreateableMaze : ICreateable
+    public  class CreateableMaze : ICreateable
     {
     //  public Node[,] maze;
         public int height;

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
-        public interface ISearcher
+        public interface ISearcher<T>
         {
             // the search method
-            Solution<T> Search(ISearchable searchable);
+            Solution<T> Search(ISearchable<T> searchable);
             // get how many nodes were evaluated by the algorithm
             int getNumberOfNodesEvaluated();
             

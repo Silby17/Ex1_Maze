@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication3
+namespace Ex1_Maze
 {
     public class State<T>
     {
@@ -21,7 +21,11 @@ namespace ConsoleApplication3
         {
             return state.Equals((obj as State<T>).state);
         }
-        // ....
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
     }
 
 }
