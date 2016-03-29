@@ -10,6 +10,7 @@ namespace ConsoleApplication3
     {
         private int value;
 
+
         public Node(int v)
         {
             this.value = v;
