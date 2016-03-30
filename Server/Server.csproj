@@ -45,14 +45,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
+    <Compile Include="ClientPresenter.cs" />
+    <Compile Include="ICommandable.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="IObservable.cs" />
+    <Compile Include="IPresenter.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="Observer.cs" />
+    <Compile Include="Options\Option1.cs" />
+    <Compile Include="Options\Option2.cs" />
+    <Compile Include="Options\Option3.cs" />
+    <Compile Include="Options\Option4.cs" />
+    <Compile Include="Options\Option5.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateObject.cs" />
+    <Compile Include="ServerModel.cs" />
+    <Compile Include="ServerPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{9d146c7d-3eb0-4d6f-bd28-f31ca70a8593}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ex1_Maze\Ex1_Maze.csproj">
+      <Project>{74801de9-a34a-4770-95e7-1f641e524e05}</Project>
+      <Name>Ex1_Maze</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
