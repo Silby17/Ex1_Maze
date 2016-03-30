@@ -122,18 +122,14 @@ namespace Ex1_Maze
 
         public static void PrintMaze(Node[,] maze, int row, int column)
         {
-
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < column; j++)
                 {
-                   //onsole.Write(maze[i, j]);
                     Console.Write(maze[i, j].GetValue());
-
                 }
                 Console.WriteLine();
             }
-
         }
 
        

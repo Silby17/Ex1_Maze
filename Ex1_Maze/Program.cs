@@ -10,7 +10,6 @@ namespace Ex1_Maze
     {
         static void Main()
         {
-            Console.WriteLine("Main started");
             MainRunner rm = new MainRunner();
             rm.startProgram();
             Console.ReadLine();
