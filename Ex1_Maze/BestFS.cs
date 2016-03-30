@@ -8,7 +8,7 @@ namespace Ex1_Maze
 {
     public class BestFS<T> : ISearcher<T>
     {
-        private Node[,] maze;
+        private Maze maze;
         private Solution<T> closedList;
         private Solution<T> openList;
 

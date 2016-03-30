@@ -11,6 +11,6 @@ namespace Ex1_Maze
         int GetType();
         int GetHeight();
         int GetWidth();
-        Node[,] GetMaze();
+        Maze GetMaze();
     }
 }

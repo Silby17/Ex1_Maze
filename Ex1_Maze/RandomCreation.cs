@@ -8,7 +8,7 @@ namespace Ex1_Maze
 {
     public class RandomCreation<T> : ICreater<T>
     {
-        public Node[,] create(ICreateable<T> createable)
+        public Maze create(ICreateable<T> createable)
         {
             throw new NotImplementedException();
         }

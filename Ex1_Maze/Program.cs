@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    public class Program<T>
+    public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Dfs<T> D = new Dfs<T>();
-            CreateableMaze<T> maze = new CreateableMaze<T>(5, 5, 1);
-            D.create(maze);
-            string user = Console.ReadLine();
+            Console.WriteLine("Main started");
+            MainRunner rm = new MainRunner();
+            rm.startProgram();
+            Console.ReadLine();
         }
     }
 }

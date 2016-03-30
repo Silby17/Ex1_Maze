@@ -51,6 +51,7 @@
     <Compile Include="ICreater.cs" />
     <Compile Include="ISearchable.cs" />
     <Compile Include="ISearcher.cs" />
+    <Compile Include="MainRunner.cs" />
     <Compile Include="Maze.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />

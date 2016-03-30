@@ -8,36 +8,36 @@ namespace Ex1_Maze
 {
     public  class CreateableMaze<T> : ICreateable<T>
     {
-    //  public Node[,] maze;
-        public int height;
-        public int width;
-        public int type;
-
-        public CreateableMaze(int height, int width, int type)
+        private Maze maze;
+       
+        public CreateableMaze(Maze maze)
         {
-        //  maze = new Node[height, width];
-            this.height = height;
-            this.width = width;
-            this.type = type;
+            this.maze = maze;  
         }
         public int GetHeight()
         {
-            return this.height;
+            return this.maze.GetHeight();
         }
 
-        public Node[,] GetMaze()
+        public Maze GetMaze()
         {
-            return new Node[height, width];
+            return this.maze;
+        }
+
+        //returns the grid itself
+        public Node[,] GetGrid()
+        {
+            return this.maze.GetMaze();
         }
 
         public int GetWidth()
         {
-            return this.width;
+            return this.maze.GetWidth();
         }
 
         int ICreateable<T>.GetType()
         {
-            return this.type;
+            return this.maze.GetType();
 
         }
     }

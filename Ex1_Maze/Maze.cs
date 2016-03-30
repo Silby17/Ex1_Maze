@@ -10,10 +10,46 @@ namespace Ex1_Maze
     public class Maze
     {
         private Node[,] grid2D;
-        public Maze(int n, int m)
+        public int height;
+        public int width;
+        public int type;
+
+        public Maze(int height, int width, int type)
         {
-            this.grid2D = new Node[n, m];
+            this.grid2D = new Node[height, width];
+            this.height = height;
+            this.width = width;
+            this.type = type;
         }
- 
+        public void SetCell(int i,int j,int value)
+        {
+            this.grid2D[i, j].SetValue(value);
+        }
+
+        public int GetValue(int i, int j)
+        {
+           return this.grid2D[i, j].GetValue();
+        }
+
+        public Node[,] GetMaze()
+        {
+            return this.grid2D;
+        }
+
+        public int GetHeight()
+        {
+            return this.height;
+        }
+
+        public int GetWidth()
+        {
+            return this.width;
+        }
+
+        public int GetType()
+        {
+            return this.type;
+        }
+
     }
 }

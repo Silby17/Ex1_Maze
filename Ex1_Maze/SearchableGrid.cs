@@ -5,29 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ex1_Maze
-{/*
-   public class SearchableGrid : ISearchable
+{
+   public class SearchableMaze<T> : ISearchable<T>
     {
-       
-        private Maze currentGrid;
+        private Maze maze;
 
-        //public getGoal...will use methods of givven maze
-        //public getEntry....
-        public List<Ex1_Maze.State<T> getAllPossibleStates(Ex1_Maze.State<T> s)
+       public SearchableMaze(Maze maze)
+        {
+            this.maze = maze;
+        }
+
+        public List<State<T>> getAllPossibleStates()
         {
             throw new NotImplementedException();
         }
 
-        public Ex1_Maze.State<T> getGoalState()
+        public List<State<T>> getAllPossibleStates(State<T> s)
         {
             throw new NotImplementedException();
         }
 
-        public Ex1_Maze.State<T> getInitialState()
+        public State<T> getGoalState()
         {
             throw new NotImplementedException();
         }
-       
+
+        public object getIGoallState()
+        {
+            throw new NotImplementedException();
+        }
+
+        public State<T> getInitialState()
+        {
+            throw new NotImplementedException();
+        }
     }
-    */
+    
 }

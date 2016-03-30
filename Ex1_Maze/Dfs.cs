@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Ex1_Maze
 {
     public class Dfs<T>: ICreater<T>
     {
-        public int height;
-        public int width;
-        public Node[,] maze;
+        private int height;
+        private int width;
+        private Maze maze;
 
-        public Node[,] create(ICreateable<T> createable)
+        public Maze create(ICreateable<T> createable)
         {
-            // throw new NotImplementedException();
-
-           maze = createable.GetMaze();
+            maze = createable.GetMaze();
             height = createable.GetHeight();
             width = createable.GetWidth();
 
             // 1 all over
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++)
-                {
-                    //  maze[i, j].SetValue(1);
-                    maze[i, j] = new Node(1);
+                {   
+                    maze.SetCell(i, j, 1); 
                 }
                  
 
@@ -37,11 +33,12 @@ namespace Ex1_Maze
             int startC = start % width;
 
             // Starting cell
-            maze[startR, startC] = new Node(0);
+            maze.SetCell(startR, startC, 0);
+            
 
             //　Allocate the maze with recursive method
             recursion(startR, startC);
-            PrintMaze(maze, width, height);
+            PrintMaze(maze.GetMaze(), width, height);
             return maze;
         }
 
@@ -61,10 +58,10 @@ namespace Ex1_Maze
                             // check for the state in up
                         if (r - 1 <= 0)
                             continue;
-                        if (maze[r - 2, c].GetValue() !=0)
+                        if (maze.GetValue(r - 2, c) !=0)
                         {
-                            maze[r - 2, c].SetValue(0);
-                            maze[r - 1, c].SetValue(0);
+                            maze.SetCell(r - 2, c,0);
+                            maze.SetCell(r - 1, c, 0);
                             recursion(r - 2, c);
                         }
                         break;
@@ -72,10 +69,10 @@ namespace Ex1_Maze
                             // check for the state in right
                         if (c + 1 >= width - 1)
                             continue;
-                        if (maze[r, c + 2].GetValue() != 0)
+                        if (maze.GetValue(r, c + 2) != 0)
                         {
-                            maze[r, c + 2].SetValue(0);
-                            maze[r, c + 1].SetValue(0);
+                            maze.SetCell(r, c + 2,0);
+                            maze.SetCell(r, c + 1,0);
                             recursion(r, c + 2);
                         }
                         break;
@@ -83,10 +80,11 @@ namespace Ex1_Maze
                             // check for the state in down
                         if (r + 1 >= height - 1)
                             continue;
-                        if (maze[r + 2, c].GetValue() != 0)
+                        if (maze.GetValue(r + 2, c) != 0)
                         {
-                            maze[r + 2, c].SetValue(0);
-                            maze[r + 1, c].SetValue(0);
+                            maze.SetCell(r + 2, c, 0);
+                            maze.SetCell(r + 1, c, 0);
+                       
                             recursion(r + 2, c);
                         }
                         break;
@@ -94,10 +92,10 @@ namespace Ex1_Maze
                             // check for the state in left
                         if (c - 1 <= 0)
                             continue;
-                        if (maze[r, c - 2].GetValue() != 0)
+                        if (maze.GetValue(r, c - 2) != 0)
                         {
-                            maze[r, c - 2].SetValue(0);
-                            maze[r, c - 1].SetValue(0);
+                            maze.SetCell(r, c - 2,0);
+                            maze.SetCell(r, c - 1,0);
                             recursion(r, c - 2);
                         }
                         break;

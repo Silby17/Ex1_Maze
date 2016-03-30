@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
+    //change NODE TO NODE<T>
     public class Node
     {
         private int value;
