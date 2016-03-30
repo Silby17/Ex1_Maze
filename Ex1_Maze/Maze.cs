@@ -16,19 +16,48 @@ namespace Ex1_Maze
 
         public Maze(int height, int width, int type)
         {
+            this.grid2D = new Node[5, 5];
             //this.grid2D = new Node[height, width];
-            Generation();
+            //Generation();
+            Generate();
+            print();
             this.height = height;
             this.width = width;
             this.type = type;
         }
+
+
+        public void Generate()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    this.grid2D[i, j] = new Node(5);
+                }
+            }
+        }
+
+        public void print()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    Console.Write(grid2D[i, j].GetValue().ToString());
+                }
+                Console.WriteLine();
+            }
+        }
+
+
 
         public void Generation()
         {
             
             foreach (Node currentNode in this.grid2D)
             {
-                grid2D[currentNode] 
+               
                 //currentNode.SetValue(1);
             }
             PrintMaze(this.grid2D, 5, 5);
