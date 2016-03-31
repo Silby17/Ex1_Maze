@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
-    public interface IView
+    public interface IPresenter
     {
-
+        void handleCommandable(string data);
+        void Start();
     }
 }

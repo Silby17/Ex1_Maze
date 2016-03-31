@@ -10,13 +10,24 @@ namespace Server2
 {
     public class Server
     {
-        private static int PORT;
+        private int PORT;
+        private IPresenter presenter;
+        IModel model;
 
+        /// <summary>
+        /// The Server constructor</summary>
+        public Server()
+        {
+            this.PORT = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["Port"]);
+            ServerView view = new ServerView();
+            this.model = new ServerModel();
+            this.presenter = new ServerPresenter(view, model);
+
+        }
 
         public void startServer()
-        {            
+        {
             Console.WriteLine("Server Started");
-            PORT = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["Port"]);
             
             IPEndPoint ipep = new IPEndPoint(IPAddress.Any, PORT);
             Socket newsock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -28,8 +39,7 @@ namespace Server2
             {
                 Socket client = newsock.Accept();
                 Console.WriteLine("Client# {0} accepted!", ++clientNum);
-                ServerPresenter cPresenter = new ServerPresenter();
-                ClientHandler handler = new ClientHandler(client, cPresenter);
+                ClientHandler handler = new ClientHandler(client, this.model);
                 Thread t = new Thread(handler.handle);
                 t.Start();
             }

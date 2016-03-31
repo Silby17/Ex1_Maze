@@ -9,13 +9,15 @@ namespace Server2
     public class ClientHandler
     {
         private Socket client;
-        public IPresenter clientPres;
-        private ServerPresenter clientPresenter;
+        private IPresenter chPresenter;
+        private IView chView;
 
-        public ClientHandler(Socket socket, ServerPresenter cPres)
+
+        public ClientHandler(Socket socket, IModel model)
         {
             this.client = socket;
-            this.clientPresenter = cPres;   
+            chView = new ClientView();
+            chPresenter = new ClientPresenter(chView, model);
         }
 
 
@@ -48,7 +50,7 @@ namespace Server2
 
         public void handleRequest(string request)
         {
-            clientPresenter.handleCommandable(request);
+            
         }
     }
 }

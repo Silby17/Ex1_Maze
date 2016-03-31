@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Server2
 {
-    public interface IPresenter
+    public interface IView
     {
-        void handleCommandable(string data);
+        event EventHandler NewRequest;
     }
 }
