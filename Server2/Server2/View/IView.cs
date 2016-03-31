@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
+    public delegate void NewRequest(Object source, EventArgs e);
+
     public interface IView
     {
-        event EventHandler NewRequest;
+        event NewRequest newInput;
+        void Notif();
     }
 }

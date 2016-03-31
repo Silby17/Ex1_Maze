@@ -16,7 +16,7 @@ namespace Server2
         public ClientHandler(Socket socket, IModel model)
         {
             this.client = socket;
-            chView = new ClientView();
+            chView = new ClientView(); 
             chPresenter = new ClientPresenter(chView, model);
         }
 
@@ -29,7 +29,6 @@ namespace Server2
             string wlc = "Welcome";
             data = Encoding.ASCII.GetBytes(wlc);
             client.Send(data, data.Length, SocketFlags.None);
-
             while (true)
             {
                 data = new byte[1024];
@@ -47,11 +46,11 @@ namespace Server2
             client.Close();
         }
 
-
-        public void handleRequest(string request)
+        public void handleRequest(string s)
         {
-            
+            chView.Notif();
         }
+
     }
 }
 

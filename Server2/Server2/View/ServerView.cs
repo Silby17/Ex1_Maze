@@ -9,6 +9,11 @@ namespace Server2
 {
     public class ServerView : IView
     {
-        public event EventHandler NewRequest;
+        public event NewRequest newInput;
+
+        public void Notif()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

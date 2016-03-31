@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
+    
     public class ClientPresenter : IPresenter
     {
-        private IView view;
-        private IModel model;
-      
+        private IView view; //publisher
+        private IModel model; // publisher
+        
+
         /// <summary>
         /// This is the constructor method </summary>
         /// <param name="v">The view for the client</param>
@@ -19,14 +21,14 @@ namespace Server2
         {
             this.view = v;
             this.model = m;
+            view.newInput += this.OnNotified;             
         }
 
-        public void ReceivedEvent(object source, EventArgs e)
+
+
+        public void OnNotified(object source, EventArgs e)
         {
-            if(source is IView)
-            {
-                Console.WriteLine("Event from IVIew Baby");
-            }
+            Console.WriteLine("Received from the Client VIew");
         }
 
 
