@@ -9,13 +9,15 @@ namespace Server2
     public class ClientHandler
     {
         private Socket client;
-        public IPresenter clientPres;
-        private ServerPresenter clientPresenter;
+        private IPresenter chPresenter;
+        private IView chView;
 
-        public ClientHandler(Socket socket, ServerPresenter cPres)
+
+        public ClientHandler(Socket socket, IModel model)
         {
             this.client = socket;
-            this.clientPresenter = cPres;   
+            chView = new ClientView(); 
+            chPresenter = new ClientPresenter(chView, model);
         }
 
 
@@ -24,17 +26,18 @@ namespace Server2
         {
             Console.WriteLine("Starting Handler");
             byte[] data = new byte[1024];
-            string wlc = "Welcome";
-            data = Encoding.ASCII.GetBytes(wlc);
-            client.Send(data, data.Length, SocketFlags.None);
-
+            //string wlc = "Welcome";
+            //data = Encoding.ASCII.GetBytes(wlc);
+            //client.Send(data, data.Length, SocketFlags.None);
             while (true)
             {
                 data = new byte[1024];
                 int recv = client.Receive(data);
                 if (recv == 0) break;
                 string str = Encoding.ASCII.GetString(data, 0, recv);
+                if (str.Equals("exit")) break;
                 Console.WriteLine(str);
+
                 handleRequest(str);
                 
                 //TO BE REMOVED IN ORDER TO KEEP SENDING REQUESTS TO SERVER
@@ -45,11 +48,11 @@ namespace Server2
             client.Close();
         }
 
-
-        public void handleRequest(string request)
+        public void handleRequest(string s)
         {
-            clientPresenter.handleCommandable(request);
+            chView.OnNewViewChange(s);
         }
+
     }
 }
 

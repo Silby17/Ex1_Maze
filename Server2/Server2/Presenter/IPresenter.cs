@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
+    
     public interface IPresenter
     {
+        void OnEventHandler(object source, EventArgs e);
         void handleCommandable(string data);
+        void CreateOptionsDictionary();
+
+        
     }
 }
