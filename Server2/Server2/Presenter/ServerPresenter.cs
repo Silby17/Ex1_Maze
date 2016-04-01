@@ -20,17 +20,24 @@ namespace Server2
         }
 
 
-        public void Start()
-        {
-            
-        }
-
-
-
-
         public void handleCommandable(string data)
         {
             //options[data].execute();
+        }
+
+        public void OnEventHandler(object source, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetOptionsDictionary()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateOptionsDictionary()
+        {
+            throw new NotImplementedException();
         }
     }
 }

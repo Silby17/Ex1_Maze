@@ -25,7 +25,7 @@ namespace Server2
 
         }
 
-        public void startServer()
+        public void StartServer()
         {
             Console.WriteLine("Server Started");
             
@@ -40,8 +40,10 @@ namespace Server2
                 Socket client = newsock.Accept();
                 Console.WriteLine("Client# {0} accepted!", ++clientNum);
                 ClientHandler handler = new ClientHandler(client, this.model);
-                Thread t = new Thread(handler.handle);
-                t.Start();
+                Task.Factory.StartNew(handler.handle);
+                
+                //Thread t = new Thread(handler.handle);
+                //t.Start();
             }
         }
     }

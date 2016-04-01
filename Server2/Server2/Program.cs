@@ -12,7 +12,7 @@ namespace Server2
         static void Main(string[] args)
         {
             Server server = new Server();
-            server.startServer();
+            server.StartServer();
         }
     }
 }

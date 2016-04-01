@@ -9,19 +9,21 @@ namespace Server2
 {
     public class ClientView : IView
     {
-        public event NewRequest newInput; //publisher
+        public event NewBiewChangeEvent newInput;
 
 
-        public void Notif()
+
+        public void OnNewViewChange(string str)
         {
-            OnNewInput();
+            throw new NotImplementedException();
         }
 
-
-        protected void OnNewInput()
+        public void PublishEvent()
         {
             if (newInput != null)
+            {
                 newInput(this, EventArgs.Empty);
+            }
         }
     }
 }
