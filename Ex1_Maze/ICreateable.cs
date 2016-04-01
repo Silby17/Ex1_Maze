@@ -12,7 +12,5 @@ namespace Ex1_Maze
         int GetHeight();
         int GetWidth();
         Maze GetMaze();
-        Node GetStartPoint();
-        Node GetEndPoint();
     }
 }

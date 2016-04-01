@@ -25,6 +25,8 @@ namespace Ex1_Maze
             this.width = width;
             this.type = type;
         }
+
+
         public void Generate()
         {
             for (int i = 0; i < 5; i++)

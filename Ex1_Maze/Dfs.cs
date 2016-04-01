@@ -11,72 +11,128 @@ namespace Ex1_Maze
         private int width;
         private Maze maze;
 
-        public void create(ICreateable<T> createable)
+        public Maze create(ICreateable<T> createable)
         {
             maze = createable.GetMaze();
             height = createable.GetHeight();
             width = createable.GetWidth();
-     
-            //initialize stack to work with
-            Stack<Node> s = new Stack<Node>();
-            s.Push(createable.GetStartPoint());
-            int i;
-            int j;
 
-            //check till the stack is empty
-            while (0 != s.Count)
+            // 1 all over
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                {   
+                    maze.SetCell(i, j, 1); 
+                }
+                 
+
+            int[] startEnd = RandomCreation<T>.getStartEndPoints(height, width);
+            int start = startEnd[0];
+            int end = startEnd[1];
+
+            int startR = start / height;
+            int startC = start % width;
+
+            // Starting cell
+            maze.SetCell(startR, startC, 0);
+            
+
+            //　Allocate the maze with recursive method
+            recursion(startR, startC);
+            PrintMaze(maze.GetMaze(), width, height);
+            return maze;
+        }
+
+
+
+        public void recursion(int r, int c)
+        {
+            // 4 random directions
+            int[] randDirs = generateRandomDirections();
+
+            // Examine each direction
+            for (int i = 0; i < randDirs.Length; i++)
             {
-                Node current = s.Pop();
-                i = current.GetRow();
-                j = current.GetCol();
-
-                //check for up move
-                if (i - 1 > 0)
+                switch (randDirs[i])
                 {
-                    if (0 != maze.GetValue(i - 2, j))
-                    {
-                        maze.SetCell(i - 2, j ,0);
-                        maze.SetCell(i - 1, j, 0);
-                       //the parent of the new node is the current 
-                        s.Push(new Node(i - 2, j, current));
-                    }
+                    case 1: // Up
+                            // check for the state in up
+                        if (r - 1 <= 0)
+                            continue;
+                        if (maze.GetValue(r - 2, c) !=0)
+                        {
+                            maze.SetCell(r - 2, c,0);
+                            maze.SetCell(r - 1, c, 0);
+                            recursion(r - 2, c);
+                        }
+                        break;
+                    case 2: // Right
+                            // check for the state in right
+                        if (c + 1 >= width - 1)
+                            continue;
+                        if (maze.GetValue(r, c + 2) != 0)
+                        {
+                            maze.SetCell(r, c + 2,0);
+                            maze.SetCell(r, c + 1,0);
+                            recursion(r, c + 2);
+                        }
+                        break;
+                    case 3: // Down
+                            // check for the state in down
+                        if (r + 1 >= height - 1)
+                            continue;
+                        if (maze.GetValue(r + 2, c) != 0)
+                        {
+                            maze.SetCell(r + 2, c, 0);
+                            maze.SetCell(r + 1, c, 0);
+                       
+                            recursion(r + 2, c);
+                        }
+                        break;
+                    case 4: // Left
+                            // check for the state in left
+                        if (c - 1 <= 0)
+                            continue;
+                        if (maze.GetValue(r, c - 2) != 0)
+                        {
+                            maze.SetCell(r, c - 2,0);
+                            maze.SetCell(r, c - 1,0);
+                            recursion(r, c - 2);
+                        }
+                        break;
                 }
+            }
 
-                // check for the state in right
-                if (j + 1 < width - 1)
+        }
+
+        /**
+        * get an array with random directions
+        */
+        public int[] generateRandomDirections()
+        {
+            List<int> randoms = new List<int>();
+            for (int i = 0; i < 4; i++)
+                randoms.Add(i + 1);
+
+            Random r = new Random();
+            IEnumerable<int> fourRandom = randoms.OrderBy(x => r.Next()).Take(4);
+            int[] array = fourRandom.ToArray();
+            return array;
+        }
+        
+
+        public static void PrintMaze(Node[,] maze, int row, int column)
+        {
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
                 {
-                    if (0 != maze.GetValue(i, j + 2))
-                    {
-                        maze.SetCell(i, j + 2, 0);
-                        maze.SetCell(i, j + 1, 0);
-                        s.Push(new Node(i, j + 2, current));
-                    }
+                    Console.Write(maze[i, j].GetValue());
                 }
-
-                // check for the state in down
-                if (i + 1 < height - 1)
-                {
-                    if (maze.GetValue(i + 2, j) != 0)
-                    {
-                        maze.SetCell(i + 2, j, 0);
-                        maze.SetCell(i + 1, j, 0);
-                        s.Push(new Node(i + 2, j, current));
-                    }
-                }
-
-                // check for the state in left
-                if (j - 1 > 0)
-                {
-                    if (maze.GetValue(i, j - 2) != 0)
-                    {
-                        maze.SetCell(i, j - 2, 0);
-                        maze.SetCell(i, j - 1, 0);
-                        s.Push(new Node(i, j - 2, current));
-                    }
-                }
-
+                Console.WriteLine();
             }
         }
+
+       
     }
 }
 

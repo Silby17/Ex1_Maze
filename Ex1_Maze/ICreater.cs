@@ -8,6 +8,6 @@ namespace Ex1_Maze
 {
     public interface ICreater<T>
     {
-        void create(ICreateable<T> createable);
+        Maze create(ICreateable<T> createable);
     }
 }

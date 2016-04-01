@@ -10,45 +10,16 @@ namespace Ex1_Maze
     public class Node
     {
         private int value;
-        private int i;
-        private int j;
-        private int cost;
-        private Node parent;
 
-        public Node(int value)
+        public Node(int v)
         {
-            this.value = value;
-        }
-
-        public Node(int i, int j, Node parent)
-        {
-            this.i = i;
-            this.j = j;
-            this.parent = parent;
-        }
-
-        public Node(int value, int i, int j)
-        {
-            this.value = value;
-            this.i = i;
-            this.j = j;
+            this.value = v;
         }
 
         public int GetValue()
         {
             return this.value;
         }
-
-        public int GetRow()
-        {
-            return this.i;
-        }
-
-        public int GetCol()
-        {
-            return this.j;
-        }
-
         public void SetValue(int v)
         {
             this.value = v;
