@@ -10,7 +10,7 @@ namespace Ex1_Maze
     public class Node
     {
         private int value;
-        private int i;
+        private int i;  
         private int j;
         private int cost;
         private Node parent;
