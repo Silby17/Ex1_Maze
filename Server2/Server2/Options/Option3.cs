@@ -8,7 +8,7 @@ namespace Server2.Options
 {
     public class Option3 : ICommandable
     {
-        public void execute()
+        public void Execute(List<object> args)
         {
             Console.WriteLine("Option 3 was chosen");
         }

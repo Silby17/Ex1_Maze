@@ -10,9 +10,8 @@ namespace Server2
     public interface IPresenter
     {
         void OnEventHandler(object source, EventArgs e);
-        void handleCommandable(string data);
+        void HandleViewEvent();
+        void HandleModelEvent();
         void CreateOptionsDictionary();
-
-        
     }
 }

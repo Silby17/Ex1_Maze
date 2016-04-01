@@ -26,9 +26,9 @@ namespace Server2
         {
             Console.WriteLine("Starting Handler");
             byte[] data = new byte[1024];
-            //string wlc = "Welcome";
-            //data = Encoding.ASCII.GetBytes(wlc);
-            //client.Send(data, data.Length, SocketFlags.None);
+            string wlc = "Welcome";
+            data = Encoding.ASCII.GetBytes(wlc);
+            client.Send(data, data.Length, SocketFlags.None);
             while (true)
             {
                 data = new byte[1024];
@@ -50,7 +50,7 @@ namespace Server2
 
         public void handleRequest(string s)
         {
-            chView.OnNewViewChange(s);
+            chView.NewInput(s);
         }
 
     }

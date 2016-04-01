@@ -11,7 +11,18 @@ namespace Server2
     {
         public event NewBiewChangeEvent newInput;
 
+        event NewBiewChangeEvent IView.newInput
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
 
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public void OnNewViewChange(string str)
         {
@@ -22,6 +33,21 @@ namespace Server2
         public void PublishEvent()
         {
             
+        }
+
+        string IView.GetStringInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IView.NewInput(string str)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IView.PublishEvent()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Server2
 {
     public interface ICommandable
     {
-        void execute();
+        void Execute(List<object> args);
     }
 }

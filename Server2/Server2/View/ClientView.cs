@@ -7,16 +7,26 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
+    
     public class ClientView : IView
     {
+        private string commandToSend;
+
         public event NewBiewChangeEvent newInput;
 
+        /// <summary>
+        /// Simple Constructor Method/// </summary>
+        public ClientView()
+        {}
 
 
-        public void OnNewViewChange(string str)
+
+        public void NewInput(string str)
         {
-            throw new NotImplementedException();
+            commandToSend = str;
+            PublishEvent();
         }
+
 
         public void PublishEvent()
         {
@@ -24,6 +34,11 @@ namespace Server2
             {
                 newInput(this, EventArgs.Empty);
             }
+        }
+
+        public string GetStringInput()
+        {
+            return this.commandToSend;
         }
     }
 }

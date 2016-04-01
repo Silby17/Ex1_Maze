@@ -12,7 +12,8 @@ namespace Server2
     public interface IView
     {
         event NewBiewChangeEvent newInput;
-        void OnNewViewChange(string str);
+        void NewInput(string str);
         void PublishEvent();
+        string GetStringInput();
     }
 }

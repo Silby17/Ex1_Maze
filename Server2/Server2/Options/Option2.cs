@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Server2.Options
 {
-    public class Option2 : ICommandable
+    public class Generate : ICommandable
     {
-        public void execute()
+        public void Execute(List<object> args)
         {
             Console.WriteLine("Option 2 was chosen");
         }
