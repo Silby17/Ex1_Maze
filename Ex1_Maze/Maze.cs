@@ -88,7 +88,7 @@ namespace Ex1_Maze
 
         public Node[,] GetMaze()
         {
-            return this.grid2D;
+            return this.grid2D;   
         }
 
         public int GetHeight()
