@@ -23,6 +23,7 @@ namespace Server2
             this.model = new ServerModel();
             this.presenter = new ServerPresenter(view, model);
 
+
         }
 
         public void StartServer()
