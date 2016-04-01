@@ -9,20 +9,7 @@ namespace Server2
 {
     public class ServerView : IView
     {
-        public event NewBiewChangeEvent newInput;
-
-        event NewBiewChangeEvent IView.newInput
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public event NewViewChangeEvent newInput;
 
         public void OnNewViewChange(string str)
         {

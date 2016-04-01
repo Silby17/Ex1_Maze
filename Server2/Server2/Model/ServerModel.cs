@@ -10,19 +10,23 @@ namespace Server2
     {
         public event NewModelChange newModelChange;
 
-        private Dictionary<string, ICommandable> options;
-
-
-        public ServerModel()
+        public void TESTMODELEVENT()
         {
-            
+            PublishEvent();
         }
 
-        
 
         public void OnModelChange()
         {
             throw new NotImplementedException();
+        }
+
+        public void PublishEvent()
+        {
+            if(newModelChange != null)
+            {
+                newModelChange(this, EventArgs.Empty);
+            }
         }
     }
 }

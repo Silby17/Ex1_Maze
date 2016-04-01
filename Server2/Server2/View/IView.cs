@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
-    public delegate void NewBiewChangeEvent(Object source, EventArgs e);
+    public delegate void NewViewChangeEvent(Object source, EventArgs e);
 
     public interface IView
     {
-        event NewBiewChangeEvent newInput;
+        event NewViewChangeEvent newInput;
         void NewInput(string str);
         void PublishEvent();
         string GetStringInput();

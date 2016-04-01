@@ -12,7 +12,7 @@ namespace Server2
     {
         private string commandToSend;
 
-        public event NewBiewChangeEvent newInput;
+        public event NewViewChangeEvent newInput;
 
         /// <summary>
         /// Simple Constructor Method/// </summary>

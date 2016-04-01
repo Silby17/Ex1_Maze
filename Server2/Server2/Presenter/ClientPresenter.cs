@@ -57,6 +57,7 @@ namespace Server2
             List<string> commandList = command.Split(' ').ToList();
             List<object> ol = commandList.ConvertAll(s => (object)s);
             options[firstWord].Execute(ol);
+            model.PublishEvent();
             //string lastWord = command.Substring(command.IndexOf(" "));
             //lastWord = lastWord.Trim();
         }
