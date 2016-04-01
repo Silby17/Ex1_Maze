@@ -40,5 +40,15 @@ namespace Ex1_Maze
             return this.maze.GetType();
 
         }
+
+        public Node GetStartPoint()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Node GetEndPoint()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
