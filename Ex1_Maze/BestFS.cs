@@ -11,11 +11,10 @@ namespace Ex1_Maze
         private Maze maze;
         private Solution<T> closedList;
         private Solution<T> openList;
-
+   
         public int getNumberOfNodesEvaluated()
         {
             return this.closedList.GetLength();
-            throw new NotImplementedException();
         }
 
         public Solution<T> Search(ISearchable<T> searchable)
@@ -25,7 +24,7 @@ namespace Ex1_Maze
 
             // Searcher's abstract method overriding
             addToOpenList(searchable.getInitialState()); 
-          //  HashSet<State<T>> closed = new HashSet<State<T>>();
+            HashSet<State<T>> closed = new HashSet<State<T>>();
             while (getNumberOfNodesEvaluated() > 0)
             {
                 // inherited from Searcher, removes the best state
