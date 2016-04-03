@@ -13,8 +13,8 @@ namespace Server2
 
         /// <summary>
         /// Constructor Method</summary>
-        /// <param name="v">The view for the Presenter</param>
-        /// <param name="m">The Model for the Presenter</param>
+        /// <param Name="v">The view for the Presenter</param>
+        /// <param Name="m">The Model for the Presenter</param>
         public ServerPresenter(IView v, IModel m)
         {
             this.view = v;
@@ -24,8 +24,8 @@ namespace Server2
 
         /// <summary>
         /// This function deals with and receives any event that is sent</summary>
-        /// <param name="source">Object from the Publisher</param>
-        /// <param name="e">Any event Arguments</param>
+        /// <param Name="source">Object from the Publisher</param>
+        /// <param Name="e">Any event Arguments</param>
         public void OnEventHandler(object source, EventArgs e)
         {
             if(source is IView)

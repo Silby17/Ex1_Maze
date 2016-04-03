@@ -15,8 +15,8 @@ namespace Server2
 
         /// <summary>
         /// This is the constructor method </summary>
-        /// <param name="v">The view for the client</param>
-        /// <param name="m">The main Model</param>
+        /// <param Name="v">The view for the client</param>
+        /// <param Name="m">The main Model</param>
         public ClientPresenter(IView v, IModel m)
         {
             this.view = v;
@@ -29,8 +29,8 @@ namespace Server2
 
         /// <summary>
         /// Handles any event that is received subsribed to</summary>
-        /// <param name="source">The source of the event</param>
-        /// <param name="e">Any event arguments sent by the event</param>
+        /// <param Name="source">The source of the event</param>
+        /// <param Name="e">Any event arguments sent by the event</param>
         public void OnEventHandler(object source, EventArgs e)
         {
             //Checks if if the event came from IView
