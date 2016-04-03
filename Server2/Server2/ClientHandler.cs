@@ -13,8 +13,8 @@ namespace Server2
 
         /// <summary>
         /// Constructor method</summary>
-        /// <param name="socket">The socket of client</param>
-        /// <param name="model">The main Model</param>
+        /// <param Name="socket">The socket of client</param>
+        /// <param Name="model">The main Model</param>
         public ClientHandler(Socket socket, IModel model)
         {
             this.client = socket;
@@ -55,7 +55,7 @@ namespace Server2
 
         /// <summary>
         /// Handles the request from the client</summary>
-        /// <param name="s">The command from the client</param>
+        /// <param Name="s">The command from the client</param>
         public void handleRequest(string s)
         {
             chView.NewInput(s);
