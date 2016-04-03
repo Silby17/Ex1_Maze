@@ -18,7 +18,7 @@ namespace Server2
         /// This function will run when there is a new input
         /// from the client that needs to be sent to the server
         /// </summary>
-        /// <param name="str">The input received</param>
+        /// <param Name="str">The input received</param>
         public void NewInput(string str)
         {
             commandToSend = str;
