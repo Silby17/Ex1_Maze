@@ -8,14 +8,23 @@ namespace Server2.Options
 {
     public class Multiplayer : ICommandable
     {
+        public event ExecutionDone execDone;
+
         public void Execute(List<object> args)
         {
             Console.WriteLine("Option 3 was chosen");
         }
 
-        public void Execute()
+
+        /// <summary>
+        /// This will publish an event to all its listeners</summary>
+        public void PublishEvent()
         {
-            Console.WriteLine("Exectue without param");
+            if (execDone != null)
+            {
+                execDone(this, EventArgs.Empty);
+            }
         }
+
     }
 }

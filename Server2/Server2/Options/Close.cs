@@ -8,14 +8,26 @@ namespace Server2.Options
 {
     public class Close : ICommandable
     {
+        public event ExecutionDone execDone;
+
+
+        /// <summary>
+        /// Executes the Desired Functions
+        /// </summary>
+        /// <param name="args">List of params</param>
         public void Execute(List<object> args)
         {
             Console.WriteLine("Option 5 was chosen");
         }
 
-        public void Execute()
+        /// <summary>
+        /// This will publish an event to all its listeners</summary>
+        public void PublishEvent()
         {
-            Console.WriteLine("Exectue without param");
+            if (execDone != null)
+            {
+                execDone(this, EventArgs.Empty);
+            }
         }
     }
 }
