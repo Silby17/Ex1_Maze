@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace Server2
 {
-
-    
     public class ClientPresenter : IPresenter
     {
         private IView view; //publisher
         private IModel model; // publisher
-        private Dictionary<string, ICommandable> options;
 
 
         /// <summary>
@@ -24,21 +21,26 @@ namespace Server2
         {
             this.view = v;
             this.model = m;
-            CreateOptionsDictionary();
+            //Subsribes to events from the IView and IModel
             view.newInput += this.OnEventHandler;
             model.newModelChange += this.OnEventHandler;        
         }
 
 
-
+        /// <summary>
+        /// Handles any event that is received subsribed to</summary>
+        /// <param name="source">The source of the event</param>
+        /// <param name="e">Any event arguments sent by the event</param>
         public void OnEventHandler(object source, EventArgs e)
         {
+            //Checks if if the event came from IView
             if (source is IView)
             {
                 Console.WriteLine("Received from the Client VIew");
                 HandleViewEvent();
                 
             }
+            //Checks if event came from IModel
             else if(source is IModel)
             {
                 Console.WriteLine("Received Event from Model");
@@ -46,38 +48,31 @@ namespace Server2
             
         }
 
-
-
-
+        /// <summary>
+        /// Handles any event from an IView object</summary>
         public void HandleViewEvent()
         {
+            //Gets the String input from the views
             string command = view.GetStringInput();
-            Console.WriteLine("Received from View: " + command);
-            string firstWord = command.Substring(0, command.IndexOf(" "));
+            
+            //Splits to a list of strings
             List<string> commandList = command.Split(' ').ToList();
+            
+            //Splits to a list of objects for passing to thread pool
             List<object> ol = commandList.ConvertAll(s => (object)s);
-            options[firstWord].Execute(ol);
-            model.PublishEvent();
-            //string lastWord = command.Substring(command.IndexOf(" "));
-            //lastWord = lastWord.Trim();
+
+            //Sends thie parameters to the Execute Function in the Model
+            this.model.ExecuteCommandalbe(ol);         
         }
 
 
-
-
+        /// <summary>
+        /// Handels any event from an IModel object</summary>
         public void HandleModelEvent()
         {
 
         }
 
-        public void CreateOptionsDictionary()
-        {
-            this.options = new Dictionary<string, ICommandable>();
-            options.Add("1", new Options.Option1());
-            options.Add("2", new Options.Generate());
-            options.Add("3", new Options.Option3());
-            options.Add("4", new Options.Option4());
-            options.Add("5", new Options.Option5());
-        }
+        
     }
 }

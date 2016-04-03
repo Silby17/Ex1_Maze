@@ -12,6 +12,5 @@ namespace Server2
         void OnEventHandler(object source, EventArgs e);
         void HandleViewEvent();
         void HandleModelEvent();
-        void CreateOptionsDictionary();
     }
 }

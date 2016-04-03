@@ -55,11 +55,5 @@ namespace Server2
         {
             throw new NotImplementedException();
         }
-
-
-        public void CreateOptionsDictionary()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

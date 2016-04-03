@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Server2.Options
 {
-    public class Generate : ICommandable
+    public class Solve : ICommandable
     {
         public void Execute(List<object> args)
         {
             Console.WriteLine("Option 2 was chosen");
+        }
+        public void Execute()
+        {
+            Console.WriteLine("Exectue without param");
         }
     }
 }

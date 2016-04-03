@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace Server2.Options
 {
-    public class Option3 : ICommandable
+    public class Multiplayer : ICommandable
     {
         public void Execute(List<object> args)
         {
             Console.WriteLine("Option 3 was chosen");
+        }
+
+        public void Execute()
+        {
+            Console.WriteLine("Exectue without param");
         }
     }
 }
