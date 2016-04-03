@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
-
 
 namespace Server2
 {
@@ -13,15 +11,21 @@ namespace Server2
         private IView chView;
 
 
+        /// <summary>
+        /// Constructor method</summary>
+        /// <param name="socket">The socket of client</param>
+        /// <param name="model">The main Model</param>
         public ClientHandler(Socket socket, IModel model)
         {
             this.client = socket;
-            chView = new ClientView(); 
+            chView = new ClientView();
             chPresenter = new ClientPresenter(chView, model);
         }
 
 
-
+        /// <summary>
+        /// The function that the server will use to handle
+        /// the client</summary>
         public void handle()
         {
             Console.WriteLine("Starting Handler");
@@ -39,7 +43,7 @@ namespace Server2
                 Console.WriteLine(str);
 
                 handleRequest(str);
-                
+
                 //TO BE REMOVED IN ORDER TO KEEP SENDING REQUESTS TO SERVER
                 data = Encoding.ASCII.GetBytes("Thanks");
                 client.Send(data, data.Length, SocketFlags.None);
@@ -48,11 +52,13 @@ namespace Server2
             client.Close();
         }
 
+
+        /// <summary>
+        /// Handles the request from the client</summary>
+        /// <param name="s">The command from the client</param>
         public void handleRequest(string s)
         {
             chView.NewInput(s);
         }
-
     }
 }
-
