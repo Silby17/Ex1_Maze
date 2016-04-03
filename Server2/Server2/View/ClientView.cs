@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server2
 {
-    
     public class ClientView : IView
     {
         private string commandToSend;
-
         public event NewViewChangeEvent newInput;
 
         /// <summary>
         /// Simple Constructor Method/// </summary>
         public ClientView()
         {}
+    
 
-
-
+        /// <summary>
+        /// This function will run when there is a new input
+        /// from the client that needs to be sent to the server
+        /// </summary>
+        /// <param name="str">The input received</param>
         public void NewInput(string str)
         {
             commandToSend = str;
@@ -28,6 +25,8 @@ namespace Server2
         }
 
 
+        /// <summary>
+        /// Sends out an event signal to all subscribers</summary>
         public void PublishEvent()
         {
             if (newInput != null)
@@ -36,6 +35,10 @@ namespace Server2
             }
         }
 
+
+        /// <summary>
+        /// Returns the string input to any request</summary>
+        /// <returns>The input from the Client</returns>
         public string GetStringInput()
         {
             return this.commandToSend;
