@@ -39,6 +39,11 @@ namespace Ex1_Maze
         {
             throw new NotImplementedException();
         }
+
+        public Maze GetMaze()
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }

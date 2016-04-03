@@ -9,7 +9,7 @@ namespace Ex1_Maze
     public class State<T>
     {
         private T state;         // the state represented by a string
-        private double cost;     // cost to reach this state (set by a setter)
+        private int cost;     // cost to reach this state (set by a setter)
         private State<T> cameFrom;  // the state we came from to this state (setter)
 
         public State(T state)    // CTOR
@@ -21,12 +21,12 @@ namespace Ex1_Maze
            
         }
 
-        public double GetCost()
+        public int GetCost()
         {
             return this.cost;
         }
 
-        public void SetCost(double cost)
+        public void SetCost(int cost)
         {
             this.cost = cost;
         }

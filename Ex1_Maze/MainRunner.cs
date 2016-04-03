@@ -11,15 +11,13 @@ namespace Ex1_Maze
 
         public void startProgram()
         {
-            Console.WriteLine("Inside start method");
-            string temp = Console.ReadLine();
-            Dfs<int> D = new Dfs<int>();
+            
             BestFS<int> B = new BestFS<int>();
-            Maze maze = new Maze(5, 5, 1);
+            Maze maze = new Maze(5, 5);
             CreateableMaze<int> Cm = new CreateableMaze<int>(maze);
             SearchableMaze<int> Sm = new SearchableMaze<int>(maze);
-            D.create(Cm);
-            string user = Console.ReadLine();
+            Cm.Generate("mazushshsh", 1);
+            maze.print();
         }
     }
 }

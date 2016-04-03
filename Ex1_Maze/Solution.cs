@@ -30,6 +30,19 @@ namespace Ex1_Maze
             return this.list.Count;
         }
 
+        public int GetCost(State<T> givenState)
+        {
+            int ans = givenState.GetCost();
+            foreach (State<T> s in this.list)
+                {
+                    if( s.GetCost() <= ans)
+                    {
+                        ans = s.GetCost();
+                    }
+                }
+            return ans;
+        }
+
         public bool Containe(State<T> s)
         {
             if (this.list.Contains(s))

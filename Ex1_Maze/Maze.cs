@@ -12,30 +12,26 @@ namespace Ex1_Maze
         private Node[,] grid2D;
         public int height;
         public int width;
-        public int type;
+  
 
-        public Maze(int height, int width, int type)
+        public Maze(int height, int width)
         {
-            this.grid2D = new Node[5, 5];
-            //this.grid2D = new Node[height, width];
-            //Generation();
-            Generate();
-            print();
             this.height = height;
             this.width = width;
-            this.type = type;
+            this.grid2D = new Node[height, width];
         }
-        public void Generate()
+        
+        public void Generate(string name, int type)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < this.height; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < this.width; j++)
                 {
-                    this.grid2D[i, j] = new Node(5);
+                    this.grid2D[i, j] = new Node(1,i,j);
                 }
             }
         }
-
+        
         public void print()
         {
             for (int i = 0; i < 5; i++)
@@ -46,19 +42,6 @@ namespace Ex1_Maze
                 }
                 Console.WriteLine();
             }
-        }
-
-
-
-        public void Generation()
-        {
-            
-            foreach (Node currentNode in this.grid2D)
-            {
-               
-                //currentNode.SetValue(1);
-            }
-            PrintMaze(this.grid2D, 5, 5);
         }
 
         public static void PrintMaze(Node[,] maze, int row, int column)
@@ -75,13 +58,13 @@ namespace Ex1_Maze
 
         public void SetCell(int i,int j,int value)
         {
-            Console.WriteLine("i = {0}  j ={1}", i ,j);
+           // Console.WriteLine("i = {0}  j ={1}", i ,j);
             this.grid2D[i, j].SetValue(value);
         }
 
         public int GetValue(int i, int j)
         {
-           return this.grid2D[i, j].GetValue();
+           return (this.grid2D[i, j].GetValue());
         }
 
         public Node[,] GetMaze()
@@ -99,10 +82,7 @@ namespace Ex1_Maze
             return this.width;
         }
 
-        public int GetType()
-        {
-            return this.type;
-        }
+      
 
     }
 }

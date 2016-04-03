@@ -21,10 +21,12 @@ namespace Ex1_Maze
         {
             this.closedList = new Solution<T>(new List<State<T>>());
             this.openList = new Solution<T>(new List<State<T>>());
+            this.maze = searchable.GetMaze();
+          //  this.closedList.GetList().Min<State<double>>();
 
             // Searcher's abstract method overriding
             addToOpenList(searchable.getInitialState()); 
-            HashSet<State<T>> closed = new HashSet<State<T>>();
+           // HashSet<State<T>> closed = new HashSet<State<T>>();
             while (getNumberOfNodesEvaluated() > 0)
             {
                 // inherited from Searcher, removes the best state
@@ -32,21 +34,28 @@ namespace Ex1_Maze
                 this.closedList.AddSolution(bestState);
                 if (bestState.Equals(searchable.getIGoallState()))
                     return backTrace(); // private method, back traces through the parents
-                                        // calling the delegated method, returns a list of states with n as a parent
-                List<State<T>> succerssors = searchable.getAllPossibleStates();
+                // calling the delegated method, returns a list of states with n as a parent
+                List<State<T>> succerssors = searchable.getAllPossibleStates(bestState);
                 foreach (State<T> s in succerssors)
                 {
                     if (!this.closedList.Containe(s) && !this.openList.Containe(s))
                     {
-                        
-                        // s.setCameFrom(n);  // already done by getSuccessors
                         addToOpenList(s);
                     }
                     else
                     {
-                        //...
+                        //is cost less?
+                        if(this.closedList.Containe(s))
+                        {
+                            if(s.GetCost() < this.closedList.GetCost(s))
+                            {
+                                //change the vlaue of s in closed list
+                                
+                            }
+                        }
 
                     }
+
                 }
             }
             throw new NotImplementedException();

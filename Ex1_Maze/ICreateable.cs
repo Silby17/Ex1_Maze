@@ -8,7 +8,6 @@ namespace Ex1_Maze
 {
     public interface ICreateable<T>
     {
-        int GetType();
         int GetHeight();
         int GetWidth(); 
         Maze GetMaze();
