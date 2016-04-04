@@ -1,5 +1,4 @@
 ﻿
-
 namespace Client
 {
     class Program
@@ -7,7 +6,7 @@ namespace Client
         static void Main(string[] args)
         {
             Client client = new Client();
-            client.StartClient();          
+            client.StartClient();
         }
     }
 }
