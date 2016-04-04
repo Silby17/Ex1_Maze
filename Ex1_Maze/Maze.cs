@@ -1,42 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex1_Maze
 {
-    //This is a base form of a grid maze.
+    
     public class Maze<T>
     {
+        public string Name { get; set; }
+        public string MazeStr { get; set; }
+        public JPosition Start { get; set; }
+        public JPosition End { get; set; }
+        private int height { get; set; }
+        private int width { get; set; }
         private Node<T>[,] grid2D;
-        private int height;
-        private int width;
-  
 
+        private int type { get; set; }
+
+
+        /// <summary>
+        /// Constructor for the Maze that recevies its sizes</summary>
+        /// <param Name="height">Height of the Maze</param>
+        /// <param Name="width">Width of the maze</param>
         public Maze(int height, int width)
         {
             this.height = height;
             this.width = width;
+            Start = new JPosition();
+            End = new JPosition();
             this.grid2D = new Node<T>[height, width];
         }
-        
+
+
+        /// <summary>
+        /// Generates the maze with the given Parameters</summary>
+        /// <param Name="name">Name of the Maze</param>
+        /// <param Name="type">The Type of Maze</param>
         public void Generate(string name, int type)
         {
+            this.Name = name;
+            this.type = type;
             for (int i = 0; i < this.height; i++)
             {
                 for (int j = 0; j < this.width; j++)
                 {
-                    this.grid2D[i, j] = new Node<T>(1,i,j);
+                    this.grid2D[i, j] = new Node<T>(1, i, j);
                 }
             }
         }
-        
-        public void print()
+
+        public Node<T> GetNode(int i, int j)
+        { return (this.grid2D[i, j]); }
+
+
+        /// <summary>
+        /// This function is called to Print the maze</summary>
+        public void Print()
         {
-            for (int i = 0; i < 5; i++)
+            Console.WriteLine(this.Name);
+            for (int i = 0; i < this.height; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < this.width; j++)
                 {
                     Console.Write(grid2D[i, j].GetValue().ToString());
                 }
@@ -44,12 +67,30 @@ namespace Ex1_Maze
             }
         }
 
-        public Node<T> GetNode(int i, int j)
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MakeMazeString()
         {
-
-            return (this.grid2D[i, j]);
+            string mazeString = "";
+            for (int i = 0; i < this.height; i++)
+            {
+                for (int j = 0; j < this.width; j++)
+                {
+                    mazeString = mazeString + grid2D[i, j].GetValue().ToString();
+                }
+            }
+            this.MazeStr = mazeString;
+            return MazeStr;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="maze"></param>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
         public static void PrintMaze(Node<T>[,] maze, int row, int column)
         {
             for (int i = 0; i < row; i++)
@@ -62,31 +103,59 @@ namespace Ex1_Maze
             }
         }
 
-        public void SetCell(int i,int j,int value)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <param name="value"></param>
+        public void SetCell(int i, int j, int value)
         {
-           // Console.WriteLine("i = {0}  j ={1}", i ,j);
+            // Console.WriteLine("Row = {0}  Col ={1}", Row ,Col);
             this.grid2D[i, j].SetValue(value);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
         public int GetValue(int i, int j)
         {
-           return (this.grid2D[i, j].GetValue());
+            return (this.grid2D[i, j].GetValue());
         }
 
+
+        /// <summary>
+        /// Returns the 
+        /// </summary>
+        /// <returns></returns>
         public Node<T>[,] GetMaze()
         {
-            return this.grid2D;   
+            return this.grid2D;
         }
 
+
+        /// <summary>
+        /// Returns the height of the maze</summary>
+        /// <returns></returns>
         public int GetHeight()
         {
             return this.height;
         }
 
+
+        /// <summary>
+        /// Returns the width of the maze </summary>
+        /// <returns></returns>
         public int GetWidth()
         {
             return this.width;
         }
+
         //returns the index i of a cell
         public int GetIndexRow(int val)
         {
@@ -95,16 +164,16 @@ namespace Ex1_Maze
             {
                 for (int j = 0; j < width; j++)
                 {
-                    if(this.grid2D[i, j].GetValue() == val)
+                    if (this.grid2D[i, j].GetValue() == val)
                     {
                         ans = i;
-                        
                     }
                 }
-              
             }
             return ans;
         }
+
+
         //returns the index j of a cell
         public int GetIndexCol(int val)
         {
@@ -116,13 +185,18 @@ namespace Ex1_Maze
                     if (this.grid2D[i, j].GetValue() == val)
                     {
                         ans = j;
-
                     }
                 }
-
             }
             return ans;
         }
 
+
+
+        public void SetSizesFromConfig(int h, int w)
+        {
+            this.height = h;
+            this.width = w;
+        }
     }
 }
