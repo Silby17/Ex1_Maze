@@ -12,6 +12,8 @@ namespace Client
         private IPAddress IP;
         private Socket server;
         private IPEndPoint ipep;
+        private Thread senderThread;
+        private Thread receiverThread;
 
         /// <summary>
         /// Constructor Method of the Client</summary>
@@ -38,10 +40,10 @@ namespace Client
         /// Starts the running of the Client/// </summary>
         public void StartClient()
         {
-            Thread sender = new Thread(SendThread);
-            Thread rece = new Thread(ReceiveThread);
-            sender.Start();
-            rece.Start();            
+            this.senderThread = new Thread(SendThread);
+            this.receiverThread = new Thread(ReceiveThread);
+            senderThread.Start();
+            receiverThread.Start();            
         }
 
 
@@ -70,6 +72,8 @@ namespace Client
                 if (toSend == "exit") break;
                 server.Send(Encoding.ASCII.GetBytes(toSend));
             }
+            receiverThread.Abort();
+            Console.WriteLine("Broken here in client");
             server.Shutdown(SocketShutdown.Both);
             server.Close();
         }
