@@ -5,6 +5,7 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using Ex1_Maze;
 
 namespace Server2.Options
 {
@@ -39,23 +40,20 @@ namespace Server2.Options
             int height = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["HEIGHT"]);
             int width = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["WIDTH"]);
 
-            Maze maze = new Maze(height, width);
-            CreateableMaze<int> cMaze = new CreateableMaze<int>(maze);
+            Maze<int> maze = new Maze<int>(height, width);
+            GeneralMaze<int> cMaze = new GeneralMaze<int>(maze);
             cMaze.Generate(name, type);
             maze.MakeMazeString();
-            
 
             //string jsonMaze = JsonConvert.SerializeObject(maze);
             JavaScriptSerializer ser = new JavaScriptSerializer();
             string jsonMaze = ser.Serialize(maze);
             jsonMaze = JToken.Parse(jsonMaze).ToString();
             
-
             File.WriteAllText(name+".json", jsonMaze);
             //this.JSONMaze = JToken.Parse(jsonMaze).ToString();
             this.JSONMaze = jsonMaze;
             PublishEvent();
-            
         }
 
         /// <summary>
@@ -67,8 +65,6 @@ namespace Server2.Options
         }
 
         public string GetJSON()
-        {
-            return this.JSONMaze;
-        }
+        { return this.JSONMaze;}
     }
 }
