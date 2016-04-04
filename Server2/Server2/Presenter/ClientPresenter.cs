@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.IO;
 
 namespace Server2
 {
@@ -36,14 +38,13 @@ namespace Server2
             //Checks if if the event came from IView
             if (source is IView)
             {
-                Console.WriteLine("Received from the Client VIew");
                 HandleViewEvent();
                 
             }
             //Checks if event came from IModel
             else if(source is IModel)
             {
-                Console.WriteLine("Received Event from Model");
+                HandleModelEvent();
             }
             
         }
@@ -70,9 +71,17 @@ namespace Server2
         /// Handels any event from an IModel object</summary>
         public void HandleModelEvent()
         {
-
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            string result = model.GetModelChange();
+            Maze m1 = JsonConvert.DeserializeObject<Maze>(result);
+            //m1.SetSizesFromConfig();
+            //m1.Print();
+            view.DisplayData(result);
         }
 
-        
+        public void SetView(IView v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

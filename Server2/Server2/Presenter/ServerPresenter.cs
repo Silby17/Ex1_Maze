@@ -1,24 +1,34 @@
-﻿using System;
+﻿using System.Web.Script.Serialization;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System;
+
 
 namespace Server2
 {
     public class ServerPresenter : IPresenter
     {
-        private IView view;
-        private IModel model; 
+        private IView view; //publisher
+        private IModel model; //publisher
 
         /// <summary>
         /// Constructor Method</summary>
         /// <param Name="v">The view for the Presenter</param>
         /// <param Name="m">The Model for the Presenter</param>
-        public ServerPresenter(IView v, IModel m)
+        public ServerPresenter(IModel m)
+        {
+            this.model = m;
+            //Subscribe to events from the Model
+            model.newModelChange += this.OnEventHandler;
+        }
+
+        public void SetView(IView v)
         {
             this.view = v;
-            this.model = m;
+            //Subscribe to events from the View
+            view.newInput += this.OnEventHandler;
         }
 
 
@@ -44,7 +54,16 @@ namespace Server2
         /// send to the Presenter </summary>
         public void HandleViewEvent()
         {
-            string inputFromView = this.view.GetStringInput();
+            //Gets the new string input from the Client
+            string newCommand = view.GetStringInput();
+            
+            //Splits to a list of strings
+            List<string> commandList = newCommand.Split(' ').ToList();
+
+            //Splits to a list of objects for passing to thread pool
+            List<object> ol = commandList.ConvertAll(s => (object)s);
+
+            this.model.ExecuteCommandalbe(ol);
         }
 
 
@@ -53,7 +72,8 @@ namespace Server2
         /// send to the cliet in the JSOn format</summary>
         public void HandleModelEvent()
         {
-            throw new NotImplementedException();
+            string result = model.GetModelChange();
+            view.DisplayData(result);
         }
     }
 }

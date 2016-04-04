@@ -9,7 +9,7 @@ namespace Server2
     public interface ICommandable
     {
         event ExecutionDone execDone;
-        void Execute(List<object> args);
+        string Execute(List<object> args);
         void PublishEvent();
     }
 }

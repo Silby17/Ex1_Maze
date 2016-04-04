@@ -10,9 +10,17 @@ namespace Server2.Options
     {
         public event ExecutionDone execDone;
 
-        public void Execute(List<object> args)
+
+        /// <summary>
+        /// This method will start the execution of the Multiplayer
+        /// game, and will recive the game name</summary>
+        /// <param name="args">Will hold the game name</param>
+        /// <returns></returns>
+        public string Execute(List<object> args)
         {
-            Console.WriteLine("Option 3 was chosen");
+            List<string> strParams = args.Select(s => (string)s).ToList();
+            string gameName = strParams[1];
+            return "Multi";
         }
 
 
@@ -20,11 +28,9 @@ namespace Server2.Options
         /// This will publish an event to all its listeners</summary>
         public void PublishEvent()
         {
-            if (execDone != null)
-            {
-                execDone(this, EventArgs.Empty);
-            }
+            if (execDone != null) {execDone(this, EventArgs.Empty);}
         }
 
+        
     }
 }

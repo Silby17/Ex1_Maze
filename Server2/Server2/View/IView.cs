@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Server2
 {
@@ -12,8 +8,9 @@ namespace Server2
     public interface IView
     {
         event NewViewChangeEvent newInput;
-        void NewInput(string str);
-        void PublishEvent();
+        void OnNewInput(string str);
+        void DisplayData(string data);
         string GetStringInput();
+        void PublishEvent();      
     }
 }

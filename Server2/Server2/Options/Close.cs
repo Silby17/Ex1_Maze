@@ -29,5 +29,10 @@ namespace Server2.Options
                 execDone(this, EventArgs.Empty);
             }
         }
+
+        string ICommandable.Execute(List<object> args)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

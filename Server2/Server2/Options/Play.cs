@@ -10,9 +10,16 @@ namespace Server2.Options
     {
         public event ExecutionDone execDone;
 
-        public void Execute(List<object> args)
+
+        /// <summary>
+        /// This method will execute the players move</summary>
+        /// <param name="args"></param>
+        public string Execute(List<object> args)
         {
-            Console.WriteLine("Option 4 was chosen");
+            List<string> strParams = args.Select(s => (string)s).ToList();
+            string move = strParams[1];
+
+            return move;
         }
 
 
@@ -20,10 +27,8 @@ namespace Server2.Options
         /// This will publish an event to all its listeners</summary>
         public void PublishEvent()
         {
-            if (execDone != null)
-            {
-                execDone(this, EventArgs.Empty);
-            }
+            if (execDone != null) {execDone(this, EventArgs.Empty);}
         }
+
     }
 }

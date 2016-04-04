@@ -24,6 +24,7 @@ namespace Server2
                 Dfs<int> D = new Dfs<int>();
                 D.create(new CreateableMaze<int>(maze));
                 SetPoints();
+                maze.MakeMazeString();
             }
             //Random
             if (0 == type)

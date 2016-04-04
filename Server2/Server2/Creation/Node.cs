@@ -12,8 +12,11 @@ namespace Server2
         private int value;
         public int row {get; set;}
         public int col { get; set; }
-        private int cost;
-        private Node parent;
+        public int cost;
+        public Node parent { get; set; }
+
+        public Node()
+        { }
 
         public Node(int i, int j, Node parent)
         {
@@ -59,8 +62,6 @@ namespace Server2
         public void SetValue(int v)
         {
             this.value = v;
-
         }
-
     }
 }

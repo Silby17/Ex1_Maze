@@ -9,8 +9,9 @@ namespace Server2
     public class Server
     {
         private int PORT;
+        private IView view;
         private IPresenter presenter;
-        IModel model;
+        private IModel model;
 
         /// <summary>
         /// The Server constructor</summary>
@@ -18,13 +19,12 @@ namespace Server2
         {
             //Reads the port from the ConfigFile
             this.PORT = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["Port"]);
-            ServerView view = new ServerView();
             
             //Creates new Model
             this.model = new Model();
 
-            //Creates new Presenter
-            this.presenter = new ServerPresenter(view, model);
+            //Creates new Presenter and passes it the Model
+            this.presenter = new ServerPresenter(model);
         }
 
 
@@ -39,11 +39,15 @@ namespace Server2
             newsock.Listen(10);
             int clientNum = 0;
 
+            //Keeps listening for more Client connection requests
             while (true)
             {
                 Socket client = newsock.Accept();
-                //Console.WriteLine("Client# {0} accepted!", ++clientNum);
-                ClientHandler handler = new ClientHandler(client, this.model);
+                Console.WriteLine("Client# {0} accepted!", ++clientNum);
+                
+                //Create new view which will handle to Client
+                ServerView handler = new ServerView(client, clientNum);
+                this.presenter.SetView(handler);
                 Task.Factory.StartNew(handler.handle);
             }
         }

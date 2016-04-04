@@ -19,7 +19,7 @@ namespace Server2
         /// from the client that needs to be sent to the server
         /// </summary>
         /// <param Name="str">The input received</param>
-        public void NewInput(string str)
+        public void OnNewInput(string str)
         {
             commandToSend = str;
             PublishEvent();
@@ -43,6 +43,11 @@ namespace Server2
         public string GetStringInput()
         {
             return this.commandToSend;
+        }
+
+        public void DisplayData(string data)
+        {
+            Console.WriteLine(data);
         }
     }
 }

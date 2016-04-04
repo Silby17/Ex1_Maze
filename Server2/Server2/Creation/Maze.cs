@@ -5,15 +5,21 @@ namespace Server2
 {
     public class Maze
     {
-        private Node[,] grid2D;
-        private int height;
-        private int width;
-        private int type;
         public string Name { get; set; }
         public string MazeStr { get; set; }
         public JPosition Start { get; set; }
         public JPosition End { get; set; }
+        
+        private int height { get; set; }
+        private int width { get; set; }
+        private Node[,] grid2D { get; set; }
+        
+        private int type { get; set; }
+        
 
+        public Maze()
+        {
+        }
 
         /// <summary>
         /// Constructor for the Maze that recevies its sizes</summary>
@@ -62,8 +68,10 @@ namespace Server2
             }
         }        
 
-
-        public void MakeMazeString()
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MakeMazeString()
         {
             string mazeString = "";
             for (int i = 0; i < this.height; i++)
@@ -74,9 +82,16 @@ namespace Server2
                 }
             }
             this.MazeStr = mazeString;
+            return MazeStr;
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="maze"></param>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
         public static void PrintMaze(Node[,] maze, int row, int column)
         {
             for (int i = 0; i < row; i++)
@@ -89,33 +104,66 @@ namespace Server2
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <param name="value"></param>
         public void SetCell(int i,int j,int value)
         {
-           // Console.WriteLine("row = {0}  col ={1}", row ,col);
+           // Console.WriteLine("Row = {0}  Col ={1}", Row ,Col);
             this.grid2D[i, j].SetValue(value);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
         public int GetValue(int i, int j)
         {
            return (this.grid2D[i, j].GetValue());
         }
 
+
+        /// <summary>
+        /// Returns the 
+        /// </summary>
+        /// <returns></returns>
         public Node[,] GetMaze()
         {
             return this.grid2D;   
         }
 
+
+        /// <summary>
+        /// Returns the height of the maze</summary>
+        /// <returns></returns>
         public int GetHeight()
         {
             return this.height;
         }
 
+
+        /// <summary>
+        /// Returns the width of the maze </summary>
+        /// <returns></returns>
         public int GetWidth()
         {
             return this.width;
         }
-
-
         
+        
+        
+        
+        public void SetSizesFromConfig(int h, int w)
+        {
+            this.height = h;
+            this.width = w;
+        }   
     }
 }
