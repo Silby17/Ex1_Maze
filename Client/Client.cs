@@ -1,8 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
+﻿using System.Net.Sockets;
 using System.Threading;
+using System.Text;
+using System.Net;
+using System;
+
 
 namespace Client
 {
@@ -53,10 +54,19 @@ namespace Client
         {
             while(true)
             {
-                byte[] data = new byte[1024];
-                int recv = server.Receive(data);
-                string stringData = Encoding.ASCII.GetString(data, 0, recv);
-                Console.WriteLine(stringData);
+                try
+                {
+                    byte[] data = new byte[1024];
+                    int recv = server.Receive(data);
+                    string stringData = Encoding.ASCII.GetString(data, 0, recv);
+                    Console.WriteLine(stringData);
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine("Connection with Server has been Terminated: Server Shut Down.");
+                    server.Shutdown(SocketShutdown.Both);
+                    server.Close();
+                }
             }
         }
 
