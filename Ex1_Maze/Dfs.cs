@@ -9,7 +9,7 @@ namespace Ex1_Maze
     {
         private int height;
         private int width;
-        private Maze maze;
+        private Maze<T> maze;
 
         public void create(ICreateable<T> createable)
         {
@@ -18,7 +18,7 @@ namespace Ex1_Maze
             width = createable.GetWidth();
      
             //initialize stack to work with
-            Stack<Node> s = new Stack<Node>();
+            Stack<Node<T>> s = new Stack<Node<T>>();
             s.Push(createable.GetStartPoint());
             int i;
             int j;
@@ -26,7 +26,7 @@ namespace Ex1_Maze
             //check till the stack is empty
             while (0 != s.Count)
             {
-                Node current = s.Pop();
+                Node<T> current = s.Pop();
                 i = current.GetRow();
                 j = current.GetCol();
 
@@ -38,7 +38,7 @@ namespace Ex1_Maze
                         maze.SetCell(i - 2, j ,0);
                         maze.SetCell(i - 1, j, 0);
                        //the parent of the new node is the current 
-                        s.Push(new Node(i - 2, j, current));
+                        s.Push(new Node<T>(i - 2, j, current));
                     }
                 }
 
@@ -49,7 +49,7 @@ namespace Ex1_Maze
                     {
                         maze.SetCell(i, j + 2, 0);
                         maze.SetCell(i, j + 1, 0);
-                        s.Push(new Node(i, j + 2, current));
+                        s.Push(new Node<T>(i, j + 2, current));
                     }
                 }
 
@@ -60,7 +60,7 @@ namespace Ex1_Maze
                     {
                         maze.SetCell(i + 2, j, 0);
                         maze.SetCell(i + 1, j, 0);
-                        s.Push(new Node(i + 2, j, current));
+                        s.Push(new Node<T>(i + 2, j, current));
                     }
                 }
 
@@ -71,7 +71,7 @@ namespace Ex1_Maze
                     {
                         maze.SetCell(i, j - 2, 0);
                         maze.SetCell(i, j - 1, 0);
-                        s.Push(new Node(i, j - 2, current));
+                        s.Push(new Node<T>(i, j - 2, current));
                     }
                 }
 

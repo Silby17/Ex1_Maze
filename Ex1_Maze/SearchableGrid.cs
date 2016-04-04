@@ -8,24 +8,24 @@ namespace Ex1_Maze
 {
    public class SearchableMaze<T> : ISearchable<T>
     {
-        private Maze maze;
+        private Maze<T> maze;
 
-       public SearchableMaze(Maze maze)
+       public SearchableMaze(Maze<T> maze)
         {
             this.maze = maze;
         }
 
-        public List<State<T>> getAllPossibleStates()
+        public List<Node<T>> getAllPossibleStates()
         {
             throw new NotImplementedException();
         }
 
-        public List<State<T>> getAllPossibleStates(State<T> s)
+        public List<Node<T>> getAllPossibleStates(Node<T> s)
         {
             throw new NotImplementedException();
         }
 
-        public State<T> getGoalState()
+        public Node<T> getGoalState()
         {
             throw new NotImplementedException();
         }
@@ -35,12 +35,12 @@ namespace Ex1_Maze
             throw new NotImplementedException();
         }
 
-        public State<T> getInitialState()
+        public Node<T> getInitialState()
         {
             throw new NotImplementedException();
         }
 
-        public Maze GetMaze()
+        public Maze<T> GetMaze()
         {
             throw new NotImplementedException();
         }

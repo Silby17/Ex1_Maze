@@ -8,19 +8,23 @@ namespace Ex1_Maze
 {
     public class Solution<T>
     {
-        private List<State<T>> list;
+        private List<Node<T>> list;
+       
+        
 
-        public Solution(List<State<T>> list)
+
+        public Solution(List<Node<T>> list)
         {
             this.list = list;
+            
         }
 
-        public List<State<T>> GetList()
+        public List<Node<T>> GetList()
         {
             return this.list;
         }
 
-        public void AddSolution(State<T> newSolution)
+        public void AddSolution(Node<T> newSolution)
         {
             this.list.Add(newSolution);
         }
@@ -30,10 +34,10 @@ namespace Ex1_Maze
             return this.list.Count;
         }
 
-        public int GetCost(State<T> givenState)
+        public int GetCost(Node<T> givenState)
         {
             int ans = givenState.GetCost();
-            foreach (State<T> s in this.list)
+            foreach (Node<T> s in this.list)
                 {
                     if( s.GetCost() <= ans)
                     {
@@ -42,8 +46,9 @@ namespace Ex1_Maze
                 }
             return ans;
         }
-
-        public bool Containe(State<T> s)
+      
+      
+        public bool Containe(Node<T> s)
         {
             if (this.list.Contains(s))
                 return true;

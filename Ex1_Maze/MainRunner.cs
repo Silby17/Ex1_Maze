@@ -11,12 +11,10 @@ namespace Ex1_Maze
 
         public void startProgram()
         {
-            
-            BestFS<int> B = new BestFS<int>();
-            Maze maze = new Maze(5, 5);
-            CreateableMaze<int> Cm = new CreateableMaze<int>(maze);
-            SearchableMaze<int> Sm = new SearchableMaze<int>(maze);
+            Maze<int> maze = new Maze<int>(5, 5);
+            GeneralMaze<int> Cm = new GeneralMaze<int>(maze);
             Cm.Generate("mazushshsh", 1);
+            Cm.Solve("nava", 1);
             maze.print();
         }
     }

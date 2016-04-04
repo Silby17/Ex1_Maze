@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace Ex1_Maze
 {
     //This is a base form of a grid maze.
-    public class Maze
+    public class Maze<T>
     {
-        private Node[,] grid2D;
-        public int height;
-        public int width;
+        private Node<T>[,] grid2D;
+        private int height;
+        private int width;
   
 
         public Maze(int height, int width)
         {
             this.height = height;
             this.width = width;
-            this.grid2D = new Node[height, width];
+            this.grid2D = new Node<T>[height, width];
         }
         
         public void Generate(string name, int type)
@@ -27,7 +27,7 @@ namespace Ex1_Maze
             {
                 for (int j = 0; j < this.width; j++)
                 {
-                    this.grid2D[i, j] = new Node(1,i,j);
+                    this.grid2D[i, j] = new Node<T>(1,i,j);
                 }
             }
         }
@@ -44,7 +44,13 @@ namespace Ex1_Maze
             }
         }
 
-        public static void PrintMaze(Node[,] maze, int row, int column)
+        public Node<T> GetNode(int i, int j)
+        {
+
+            return (this.grid2D[i, j]);
+        }
+
+        public static void PrintMaze(Node<T>[,] maze, int row, int column)
         {
             for (int i = 0; i < row; i++)
             {
@@ -67,7 +73,7 @@ namespace Ex1_Maze
            return (this.grid2D[i, j].GetValue());
         }
 
-        public Node[,] GetMaze()
+        public Node<T>[,] GetMaze()
         {
             return this.grid2D;   
         }
@@ -81,8 +87,42 @@ namespace Ex1_Maze
         {
             return this.width;
         }
+        //returns the index i of a cell
+        public int GetIndexRow(int val)
+        {
+            int ans = 0;
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if(this.grid2D[i, j].GetValue() == val)
+                    {
+                        ans = i;
+                        
+                    }
+                }
+              
+            }
+            return ans;
+        }
+        //returns the index j of a cell
+        public int GetIndexCol(int val)
+        {
+            int ans = 0;
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if (this.grid2D[i, j].GetValue() == val)
+                    {
+                        ans = j;
 
-      
+                    }
+                }
+
+            }
+            return ans;
+        }
 
     }
 }

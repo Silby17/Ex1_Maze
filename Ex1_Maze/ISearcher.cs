@@ -13,9 +13,9 @@ namespace Ex1_Maze
             // get how many nodes were evaluated by the algorithm
             int getNumberOfNodesEvaluated();
             //adds to the open list all the states that are in the list
-             void addToOpenList(List<State<T>> list);
+             void addToOpenList(List<Node<T>> list);
             //pops the best state
-            State<T> popOpenList();
+            Node<T> popOpenList();
 
     } 
 }

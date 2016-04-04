@@ -10,7 +10,7 @@ namespace Ex1_Maze
     {
         private int height;
         private int width;
-        private Maze maze;
+        private Maze<T> maze;
 
         //By prim algo
         public void create(ICreateable<T> createable)
@@ -18,7 +18,7 @@ namespace Ex1_Maze
             maze = createable.GetMaze();
             height = createable.GetHeight();
             width = createable.GetWidth();
-            List<Node> primList = new List<Node>();
+            List<Node<T>> primList = new List<Node<T>>();
             primList.Add(createable.GetStartPoint());
 
             while (primList.Count > 0)
@@ -28,11 +28,11 @@ namespace Ex1_Maze
             }
         }
 
-        public List<Node> getNeighbors(List<Node> neighbors)
+        public List<Node<T>> getNeighbors(List<Node<T>> neighbors)
         {
             int rundomNumber = new Random().Next(neighbors.Count);
             //choose a randon neighbor to go to
-            Node current = neighbors[rundomNumber];
+            Node<T> current = neighbors[rundomNumber];
             maze.SetCell(current.GetRow(), current.GetCol(), 0);
 
             //check if ther are parents to mark the point between
@@ -63,28 +63,28 @@ namespace Ex1_Maze
             if (row - 2 >= 0 && this.maze.GetValue(row - 1, col) == 1 &&
                 this.maze.GetValue(row - 2, col) == 1)
             {
-                neighbors.Add(new Node(row - 2, col, current));
+                neighbors.Add(new Node<T>(row - 2, col, current));
             }
 
             //down
             if (row + 2 < this.height && this.maze.GetValue(row + 1, col) == 1 &&
                 this.maze.GetValue(row + 2, col) == 1)
             {
-                neighbors.Add(new Node(row + 2, col, current));
+                neighbors.Add(new Node<T>(row + 2, col, current));
             }
 
             //left
             if (col - 2 >= 0 && this.maze.GetValue(row, col - 1) == 1 &&
                 this.maze.GetValue(row, col - 2) == 1)
             {
-                neighbors.Add(new Node(row, col - 2, current));
+                neighbors.Add(new Node<T>(row, col - 2, current));
             }
 
             //right
             if (col + 2 < this.width && this.maze.GetValue(row, col + 1) == 1 &&
                this.maze.GetValue(row, col + 2) == 1)
             { 
-                neighbors.Add(new Node(row, col +2, current));
+                neighbors.Add(new Node<T>(row, col +2, current));
             }
             return neighbors;
         }

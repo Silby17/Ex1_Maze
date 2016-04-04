@@ -9,12 +9,11 @@ namespace Ex1_Maze
 {
     public interface ISearchable<T>
     {
-        Maze GetMaze();
-        State<T> getInitialState();
-        State<T> getGoalState();
-        List<State<T>> getAllPossibleStates(State<T> s);
-        object getIGoallState();
-        List<State<T>> getAllPossibleStates();
+        Maze<T> GetMaze();
+        Node<T> getInitialState();
+        Node<T> getGoalState();
+        List<Node<T>> getAllPossibleStates(Node<T> n);
+        List<Node<T>> getAllPossibleStates();
     }
 
 }

@@ -7,23 +7,40 @@ using System.Threading.Tasks;
 namespace Ex1_Maze
 {
     //change NODE TO NODE<T>
-    public class Node
+    public class Node<T>
     {
         private int value;
         private int i;  
         private int j;
         private int cost;
-        private Node parent;
+        private Node<T> parent;
 
-        public Node(int i, int j, Node parent)
+        public Node(int i, int j, Node<T> parent)
         {
             this.i = i;
             this.j = j;
             this.parent = parent;
-            this.cost = new Random().Next(0, 20) + parent.GetCost();
+            this.cost = new Random().Next(0, 20) ;
             this.value = 0;
         }
 
+        public Node(int val)
+        {
+            //this.i = i;
+            //this.j = j;
+            //this.parent = parent;
+           // this.cost = new Random().Next(0, 20);
+            this.value = val;
+        }
+
+        public Node()
+        {
+            //this.i = i;
+            //this.j = j;
+            //this.parent = parent;
+             this.cost = new Random().Next(0, 20);
+           // this.value = val;
+        }
         public Node(int value, int i, int j)
         {
             this.value = value;
@@ -51,14 +68,25 @@ namespace Ex1_Maze
             return this.j;
         }
 
-        public Node GetParent()
+        public Node<T> GetParent()
         {
             return this.parent;
         }
+
         public void SetValue(int v)
         {
             this.value = v;
 
+        }
+        public void SetParent(Node<T> s)
+        {
+            this.parent = s;
+        }
+
+
+        public void SetCost(int cost)
+        {
+            this.cost = cost;
         }
 
     }
