@@ -73,7 +73,7 @@ namespace Server2
         {
             JavaScriptSerializer ser = new JavaScriptSerializer();
             string result = model.GetModelChange();
-            Maze m1 = JsonConvert.DeserializeObject<Maze>(result);
+            //Maze m1 = JsonConvert.DeserializeObject<Maze>(result);
             //m1.SetSizesFromConfig();
             //m1.Print();
             view.DisplayData(result);
