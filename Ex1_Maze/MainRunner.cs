@@ -10,11 +10,10 @@ namespace Ex1_Maze
     {
 
         public void startProgram()
-        {
-            
+        {   
             Maze<int> maze = new Maze<int>(5, 5);
             GeneralMaze<int> Cm = new GeneralMaze<int>(maze);
-            Cm.Generate("mazushshsh", 1);
+            Cm.Generate("mazushshsh", 0);
            // Cm.Solve("nava", 1);
             maze.Print();
         }

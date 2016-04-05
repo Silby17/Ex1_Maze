@@ -56,7 +56,7 @@ namespace Ex1_Maze
 
         public void SetStart()
         {
-            this.start = this.grid2D[new Random().Next(0, GetWidth() - 1), 0];
+            this.start = this.grid2D[0, new Random().Next(0, GetHeight() - 1)];
             this.start.SetValue(0);
         }
 
@@ -68,7 +68,7 @@ namespace Ex1_Maze
 
         public void SetEnd()
         {
-            this.end = this.grid2D[new Random().Next(0, GetWidth() - 1), GetHeight() - 1];
+            this.end = this.grid2D[GetWidth() - 1, new Random().Next(0, GetHeight() - 1)];
             this.end.SetValue(0);
         }
 

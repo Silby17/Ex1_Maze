@@ -16,7 +16,8 @@ namespace Ex1_Maze
             maze = createable.GetMaze();
             height = createable.GetHeight();
             width = createable.GetWidth();
-     
+            Console.Write("in dfs");
+            createable.GetMaze().Print();
             //initialize stack to work with
             Stack<Node<T>> s = new Stack<Node<T>>();
             s.Push(createable.GetStartPoint());

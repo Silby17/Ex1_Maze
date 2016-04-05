@@ -8,14 +8,11 @@ namespace Ex1_Maze
 {
     public class GeneralMaze<T> : ICreateable<T>, ISearchable<T>
     {
-
         private Maze<T> maze;
-     
 
         public GeneralMaze(Maze<T> maze)
         {
-            this.maze = maze;
-           
+            this.maze = maze;  
         }
 
         //[type] - 0 for random and 1 for DFS
@@ -26,12 +23,21 @@ namespace Ex1_Maze
             if (1 == type)
             {
                 Dfs<T> D = new Dfs<T>();
-                D.create(new GeneralMaze<T>(this.maze));
+                // D.create(new GeneralMaze<T>(this.maze));
+                Console.WriteLine("the s row: " + GetStartPoint().GetRow());
+                Console.WriteLine("the s col: " + GetStartPoint().GetCol());
+                Console.WriteLine("the e row: " + GetEndPoint().GetRow());
+                Console.WriteLine("the e col: " + GetEndPoint().GetCol());
+                D.create(this);
             }
             //Random
             if (0 == type)
             {
                 RandomCreation<T> R = new RandomCreation<T>();
+                Console.WriteLine("the s row: " + GetStartPoint().GetRow());
+                Console.WriteLine("the s col: " + GetStartPoint().GetCol());
+                Console.WriteLine("the e row: " + GetEndPoint().GetRow());
+                Console.WriteLine("the e col: " + GetEndPoint().GetCol());
                 R.create(new GeneralMaze<T>(this.maze));
             }
         }
@@ -43,7 +49,8 @@ namespace Ex1_Maze
             if (1 == type)
             {
                 BestFS<T> B = new BestFS<T>();
-                B.Search(new GeneralMaze<T>(maze));
+               // B.Search(new GeneralMaze<T>(maze));
+                B.Search(this);
             }
             //Breadth first
             if (0 == type)
@@ -53,8 +60,6 @@ namespace Ex1_Maze
             }
 
         }
-
-
         public int GetHeight()
         {
             return this.maze.GetHeight();
