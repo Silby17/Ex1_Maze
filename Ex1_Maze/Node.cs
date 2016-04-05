@@ -33,6 +33,14 @@ namespace Ex1_Maze
             this.value = val;
         }
 
+        public Node(int row, int col, int value, int cost)
+        {
+            this.i = row;
+            this.j = col;
+            this.cost = cost;
+            this.value = value;
+        }
+
 
         public Node()
         {

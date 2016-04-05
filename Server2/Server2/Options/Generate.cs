@@ -68,8 +68,6 @@ namespace Server2.Options
         { return this.JSONMaze;}
 
 
-
-
         public GeneralMaze<int> GetGmaze() { return gMa; }
     }
 

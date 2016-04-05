@@ -19,18 +19,13 @@ namespace Ex1_Maze
         public void Generate(string name, int type)
         {
             this.maze.Generate(name, type);
-            //DFS
-            if (1 == type)
+            if (type == 1) //Create using DFS
             {
-                Dfs<T> D = new Dfs<T>();
-                Console.WriteLine("the s row: " + GetStartPoint().GetRow());
-                Console.WriteLine("the s col: " + GetStartPoint().GetCol());
-                Console.WriteLine("the e row: " + GetEndPoint().GetRow());
-                Console.WriteLine("the e col: " + GetEndPoint().GetCol());
-                D.create(this);
+                CreateDFS<T> DFSMaze = new CreateDFS<T>();
+                DFSMaze.create(this);
             }
             //Random
-            if (0 == type)
+            else if (0 == type)
             {
                 RandomCreation<T> R = new RandomCreation<T>();
                 Console.WriteLine("the s row: " + GetStartPoint().GetRow());
@@ -96,6 +91,16 @@ namespace Ex1_Maze
             
             return (this.maze.getEnd());
 
+        }
+
+        public void SetStartPoints(int row, int col)
+        {
+            maze.SetStartingCell(row, col);
+        }
+
+        public void SetEndPoints(int row, int col)
+        {
+            maze.SetEndingCell(row, col);
         }
 
       

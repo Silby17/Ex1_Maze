@@ -49,9 +49,9 @@ namespace Ex1_Maze
                 }
             }
             //sets the start and end
-            SetStart();
+            //SetStart();
             //and end
-            SetEnd();
+            //SetEnd();
         }
 
 
@@ -151,6 +151,21 @@ namespace Ex1_Maze
         {
             // Console.WriteLine("Row = {0}  Col ={1}", Row ,Col);
             this.grid2D[i, j].SetValue(value);
+        }
+
+        public void SetStartingCell(int row, int col)
+        {
+            this.Start.Row = row;
+            this.Start.Col = col;
+            this.start = new Node<T>(row, col, 0, 0);
+            
+        }
+
+        public void SetEndingCell(int row, int col)
+        {
+            this.End.Row = row;
+            this.End.Col = col;
+            this.end = new Node<T>(row, col, 0, 0);
         }
 
 
