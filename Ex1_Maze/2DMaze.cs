@@ -117,8 +117,8 @@ namespace Ex1_Maze
                     mazeString = mazeString + grid2D[i, j].GetValue().ToString();
                 }
             }
-            this.MazeStr = mazeString;
-            return MazeStr;
+            this.Maze = mazeString;
+            return Maze;
         }
 
 

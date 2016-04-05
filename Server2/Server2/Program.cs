@@ -11,6 +11,7 @@ namespace Server2
     {
         static void Main(string[] args)
         {
+            //Starts the Server Running
             Server server = new Server();
             server.StartServer();
         }
