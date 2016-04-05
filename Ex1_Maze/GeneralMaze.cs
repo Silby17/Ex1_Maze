@@ -23,7 +23,6 @@ namespace Ex1_Maze
             if (1 == type)
             {
                 Dfs<T> D = new Dfs<T>();
-                // D.create(new GeneralMaze<T>(this.maze));
                 Console.WriteLine("the s row: " + GetStartPoint().GetRow());
                 Console.WriteLine("the s col: " + GetStartPoint().GetCol());
                 Console.WriteLine("the e row: " + GetEndPoint().GetRow());
@@ -54,14 +53,13 @@ namespace Ex1_Maze
             if (1 == type)
             {
                 BestFS<T> B = new BestFS<T>();
-               // B.Search(new GeneralMaze<T>(maze));
                 B.Search(this);
             }
             //Breadth first
             if (0 == type)
             {
-                // BreadthFS<int> B = new BreadthFS<int>();
-                //B.Search(new GeneralMaze<int>(maze));
+                // BreadthFS<T> B = new BreadthFS<T>();
+                //B.Search(this);
             }
 
         }
