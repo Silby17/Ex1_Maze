@@ -15,7 +15,7 @@ namespace Ex1_Maze
             GeneralMaze<int> Cm = new GeneralMaze<int>(maze);
             Cm.Generate("mazushshsh", 1);
             Cm.Solve("nava", 1);
-            maze.print();
+            //maze.print();
         }
     }
 }
