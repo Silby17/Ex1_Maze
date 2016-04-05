@@ -10,10 +10,14 @@ namespace Ex1_Maze
     {
 
         private Maze<T> maze;
+        private Node<T> Start;
+        private Node<T> end;
 
         public GeneralMaze(Maze<T> maze)
         {
             this.maze = maze;
+            this.Start = new Node<T>(0, new Random().Next(0, GetWidth() - 1), 0);
+            this.end = new Node<T>(0, new Random().Next(0, GetWidth() - 1), GetHeight() - 1);
         }
 
         //[type] - 0 for random and 1 for DFS
@@ -77,35 +81,20 @@ namespace Ex1_Maze
 
         public Node<T> GetStartPoint()
         {
-            return (new Node<T>(0, 0, new Random().Next(0, GetHeight() - 1)));
+            
+            return (this.Start);
         }
 
         public Node<T> GetEndPoint()
         {
-            return (new Node<T>(0, new Random().Next(0, GetWidth() - 1), GetHeight() - 1));
+            
+            return (this.end);
 
         }
 
-        public Node<T> getInitialState()
-        {
-            return new Node<T>(GetStartPoint().GetValue());
-        }
+      
 
-        public Node<T> getGoalState()
-        {
-            return new Node<T>(GetEndPoint().GetValue());
-        }
-
-        public bool isFree(int x, int y)
-        {
-            if ((x >= 0 && x < maze.GetWidth()) && (y >= 0 && y < maze.GetHeight()))
-            {
-                return true;
-            }
-            return false;
-        }
-
-
+    
         /// <summary>
         /// returns a list of all possibles moves
         /// </summary>
@@ -116,7 +105,7 @@ namespace Ex1_Maze
             List<Node<T>> possibleStates = new List<Node<T>>();
             int i = n.GetRow();
             int j = n.GetCol();
-
+            Console.WriteLine("i: {0} j: {1}", i, j);
             // cheack up
             if ((j > 0) &&(this.maze.GetValue(i, j - 1) != 1))
             {
@@ -141,7 +130,14 @@ namespace Ex1_Maze
             return possibleStates;
         }
 
+        public Node<T> getInitialState()
+        {
+            return this.Start;
+        }
 
-
+        public Node<T> getGoalState()
+        {
+            return this.end;
+        }
     }
 }
