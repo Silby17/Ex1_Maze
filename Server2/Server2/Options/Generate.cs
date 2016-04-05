@@ -14,6 +14,7 @@ namespace Server2.Options
         public event ExecutionDone execDone;
         private string maze;
         private string JSONMaze;
+        private GeneralMaze<int> gMa; 
 
 
         /// <summary>
@@ -39,12 +40,11 @@ namespace Server2.Options
         {
             int height = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["HEIGHT"]);
             int width = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["WIDTH"]);
-
-            _2DMaze<int> maze = new _2DMaze<int>(height, width);
+            Maze<int> maze = new Maze<int>(height, width);
             GeneralMaze<int> cMaze = new GeneralMaze<int>(maze);
             cMaze.Generate(name, type);
             maze.MakeMazeString();
-
+            this.gMa = cMaze;
             //string jsonMaze = JsonConvert.SerializeObject(maze);
             JavaScriptSerializer ser = new JavaScriptSerializer();
             string jsonMaze = ser.Serialize(maze);
@@ -66,5 +66,11 @@ namespace Server2.Options
 
         public string GetJSON()
         { return this.JSONMaze;}
+
+
+
+
+        public GeneralMaze<int> GetGmaze() { return gMa; }
     }
+
 }
