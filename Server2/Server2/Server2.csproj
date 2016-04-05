@@ -50,14 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
-    <Compile Include="Creation\CreateableMaze.cs" />
-    <Compile Include="Creation\Dfs.cs" />
-    <Compile Include="Creation\ICreateable.cs" />
-    <Compile Include="Creation\ICreater.cs" />
-    <Compile Include="Creation\Maze.cs" />
-    <Compile Include="Creation\Node.cs" />
-    <Compile Include="Creation\RandomCreation.cs" />
-    <Compile Include="Creation\State.cs" />
     <Compile Include="JPosition.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Model.cs" />
@@ -84,7 +76,12 @@
   <ItemGroup>
     <Content Include="Server.csproj" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ex1_Maze\Ex1_Maze.csproj">
+      <Project>{74801de9-a34a-4770-95e7-1f641e524e05}</Project>
+      <Name>Ex1_Maze</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
