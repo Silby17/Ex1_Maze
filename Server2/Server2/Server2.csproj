@@ -50,15 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
-    <Compile Include="Creation\CreateableMaze.cs" />
-    <Compile Include="Creation\Dfs.cs" />
-    <Compile Include="Creation\ICreateable.cs" />
-    <Compile Include="Creation\ICreater.cs" />
-    <Compile Include="Creation\Maze.cs" />
-    <Compile Include="Creation\Node.cs" />
-    <Compile Include="Creation\RandomCreation.cs" />
-    <Compile Include="Creation\State.cs" />
-    <Compile Include="JPosition.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Presenter\ClientPresenter.cs" />
