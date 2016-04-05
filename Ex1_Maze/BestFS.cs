@@ -20,13 +20,15 @@ namespace Ex1_Maze
 
         public Solution<T> Search(ISearchable<T> searchable)
         {
+            Console.WriteLine("here0");
             this.closedList = new Solution<T>(new List<Node<T>>());
             this.openList = new Solution<T>(new List<Node<T>>());
             this.maze = searchable.GetMaze();
             // Searcher's abstract method overriding
             addToOpenList(searchable.getInitialState());
             // HashSet<State<T>> closed = new HashSet<State<T>>();
-            while (getNumberOfNodesEvaluated() > 0)
+            // while (getNumberOfNodesEvaluated() > 0)
+            while (this.openList.GetLength() != 0)
             {
                 // inherited from Searcher, removes the best state
                 Node<T> bestState = popOpenList();
@@ -66,7 +68,6 @@ namespace Ex1_Maze
                         }
                     }
                 }
-                //throw new NotImplementedException();
             }
            return(backTrace(searchable));
         }
@@ -84,6 +85,8 @@ namespace Ex1_Maze
                 //changes value to 2 in maze and in closedlist
                 searchable.GetMaze().SetCell(row, col, 2);
                 this.closedList.GetList().ElementAt(i).SetValue(2);
+                Console.WriteLine("here1");
+
             }
             return resultList;
         }

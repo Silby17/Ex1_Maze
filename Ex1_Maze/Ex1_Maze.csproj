@@ -45,8 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BestFS.cs" />
-    <Compile Include="GeneralMaze.cs" />
     <Compile Include="Dfs.cs" />
+    <Compile Include="GeneralMaze.cs" />
     <Compile Include="ICreateable.cs" />
     <Compile Include="ICreater.cs" />
     <Compile Include="IMaze.cs" />

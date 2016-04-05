@@ -95,6 +95,17 @@ namespace Ex1_Maze
         {
             return new Node<T>(GetEndPoint().GetValue());
         }
+
+        public bool isFree(int x, int y)
+        {
+            if ((x >= 0 && x < maze.GetWidth()) && (y >= 0 && y < maze.GetHeight()))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
         /// <summary>
         /// returns a list of all possibles moves
         /// </summary>
@@ -107,22 +118,22 @@ namespace Ex1_Maze
             int j = n.GetCol();
 
             // cheack up
-            if ((this.maze.GetValue(i, j - 1) != 1) && (j >= 0))
+            if ((j > 0) &&(this.maze.GetValue(i, j - 1) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i, j - 1));
             }
             //down
-            if ((this.maze.GetValue(i, j + 1) != 1) && (j <= GetHeight() - 1))
+            if ((j < GetHeight()) && (this.maze.GetValue(i, j + 1) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i, j + 1));
             }
             //left
-            if ((this.maze.GetValue(i - 1, j) != 1) && (i >= 0))
+            if ((i > 0) && (this.maze.GetValue(i - 1, j) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i - 1, j));
             }
             //right
-            if ((this.maze.GetValue(i + 1, j) != 1) && (i <= GetWidth() - 1))
+            if ((i < GetWidth()) && (this.maze.GetValue(i + 1, j) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i + 1, j));
             }

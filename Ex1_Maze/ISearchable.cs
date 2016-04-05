@@ -13,7 +13,7 @@ namespace Ex1_Maze
         Node<T> getInitialState();
         Node<T> getGoalState();
         List<Node<T>> getAllPossibleStates(Node<T> n);
-        List<Node<T>> getAllPossibleStates();
+        
     }
 
 }
