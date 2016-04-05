@@ -3,7 +3,6 @@ using System.Net.Sockets;
 using System;
 using System.Net;
 
-
 namespace Server2
 {
     public class Server
