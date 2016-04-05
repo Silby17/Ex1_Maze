@@ -6,7 +6,7 @@ namespace Ex1_Maze
     public class _2DMaze<T>
     {
         public string Name { get; set; }
-        public string MazeStr { get; set; }
+        public string Maze { get; set; }
         public JPosition Start { get; set; }
         public JPosition End { get; set; }
 
