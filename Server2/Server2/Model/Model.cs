@@ -98,8 +98,6 @@ namespace Server2
             }
         }
 
-        
-
 
         /// <summary>
         /// This method will create the ICommandable dictionary
