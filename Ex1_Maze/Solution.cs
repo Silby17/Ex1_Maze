@@ -24,6 +24,18 @@ namespace Ex1_Maze
             return this.list;
         }
 
+        public Node<T> FindNode(Node<T> given)
+        {
+            foreach (Node<T> s in this.list)
+            {
+                if (s.Equals(given))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
         public void AddSolution(Node<T> newSolution)
         {
             this.list.Add(newSolution);

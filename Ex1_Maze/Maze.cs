@@ -13,6 +13,8 @@ namespace Ex1_Maze
         private int height { get; set; }
         private int width { get; set; }
         private Node<T>[,] grid2D;
+        private Node<T> start;
+        private Node<T> end;
 
         private int type { get; set; }
 
@@ -46,10 +48,39 @@ namespace Ex1_Maze
                     this.grid2D[i, j] = new Node<T>(1, i, j);
                 }
             }
+            //sets the start and end
+            SetStart();
+            //and end
+            SetEnd();
+        }
+
+        public void SetStart()
+        {
+            this.start = this.grid2D[new Random().Next(0, GetWidth() - 1), 0];
+            this.start.SetValue(0);
+        }
+
+        public Node<T> getStart()
+        {
+            return this.start;
+        }
+
+
+        public void SetEnd()
+        {
+            this.end = this.grid2D[new Random().Next(0, GetWidth() - 1), GetHeight() - 1];
+            this.end.SetValue(0);
+        }
+
+        public Node<T> getEnd()
+        {
+            return this.end;
         }
 
         public Node<T> GetNode(int i, int j)
-        { return (this.grid2D[i, j]); }
+        {
+            return (this.grid2D[i, j]);
+        }
 
 
         /// <summary>

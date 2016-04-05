@@ -10,14 +10,12 @@ namespace Ex1_Maze
     {
 
         private Maze<T> maze;
-        private Node<T> Start;
-        private Node<T> end;
+     
 
         public GeneralMaze(Maze<T> maze)
         {
             this.maze = maze;
-            this.Start = new Node<T>(0, new Random().Next(0, GetWidth() - 1), 0);
-            this.end = new Node<T>(0, new Random().Next(0, GetWidth() - 1), GetHeight() - 1);
+           
         }
 
         //[type] - 0 for random and 1 for DFS
@@ -82,13 +80,13 @@ namespace Ex1_Maze
         public Node<T> GetStartPoint()
         {
             
-            return (this.Start);
+            return (this.maze.getStart());
         }
 
         public Node<T> GetEndPoint()
         {
             
-            return (this.end);
+            return (this.maze.getEnd());
 
         }
 
@@ -132,12 +130,12 @@ namespace Ex1_Maze
 
         public Node<T> getInitialState()
         {
-            return this.Start;
+            return (this.maze.getStart());
         }
 
         public Node<T> getGoalState()
         {
-            return this.end;
+            return (this.maze.getEnd());
         }
     }
 }

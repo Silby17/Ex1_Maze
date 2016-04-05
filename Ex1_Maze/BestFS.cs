@@ -27,9 +27,10 @@ namespace Ex1_Maze
             // Searcher's abstract method overriding
             addToOpenList(searchable.getInitialState());
             // HashSet<State<T>> closed = new HashSet<State<T>>();
-            // while (getNumberOfNodesEvaluated() > 0)
+           
             while (this.openList.GetLength() != 0)
             {
+                Console.WriteLine("Inside while");
                 // inherited from Searcher, removes the best state
                 Node<T> bestState = popOpenList();
                 this.closedList.AddSolution(bestState);
@@ -39,10 +40,12 @@ namespace Ex1_Maze
                 List<Node<T>> succerssors = searchable.getAllPossibleStates(bestState);
                 foreach (Node<T> s in succerssors)
                 {
+                    Console.WriteLine("inside for each");
                     // If it is not in CLOSED and it is not in OPEN:
                     //evaluate it, add it to OPEN, and record its parent.
                     if (!this.closedList.Containe(s) && !this.openList.Containe(s))
                     {
+                        Console.WriteLine("inside IFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
                         s.SetCost(s.GetCost() + bestState.GetCost());
                         addToOpenList(s);
                         s.SetParent(bestState);
@@ -51,20 +54,19 @@ namespace Ex1_Maze
                     else
                     {
                         //Otherwise, if this new path is better than previous one, change its recorded parent.
-                        if (s.GetCost() < this.closedList.GetCost(s))
+                        if ((s.GetCost() + bestState.GetCost()) < this.closedList.GetCost(s))
                         {
                             s.SetParent(bestState);
-                            //change the vlaue of s in closed list?
-                        }
-                        //i.  If it is not in OPEN add it to OPEN.
-                        if (!this.openList.Containe(s))
-                        {
-                            addToOpenList(s);
-                        }
-                        // ii.Otherwise, adjust its priority in OPEN using this new evaluation.
-                        else
-                        {
-                            this.openList.AddSolution(s);
+                                //i.  If it is not in OPEN add it to OPEN.
+                                if (!this.openList.Containe(s))
+                                {
+                                    addToOpenList(s);
+                                }
+                                // ii.Otherwise, adjust its priority in OPEN using this new evaluation.
+                                else
+                                {
+                                    this.openList.FindNode(s).SetCost(s.GetCost() + bestState.GetCost());
+                                }
                         }
                     }
                 }
