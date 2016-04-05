@@ -18,6 +18,7 @@ namespace Ex1_Maze
             maze = createable.GetMaze();
             height = createable.GetHeight();
             width = createable.GetWidth();
+            createable.GetMaze().Print();
             List<Node<T>> primList = new List<Node<T>>();
             primList.Add(createable.GetStartPoint());
 
