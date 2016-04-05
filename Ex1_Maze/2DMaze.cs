@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace Ex1_Maze
 {
-    
-    public class Maze<T>
+    public class _2DMaze<T>
     {
         public string Name { get; set; }
         public string MazeStr { get; set; }
         public JPosition Start { get; set; }
         public JPosition End { get; set; }
+
+
         private int height { get; set; }
         private int width { get; set; }
         private Node<T>[,] grid2D;
         private Node<T> start;
         private Node<T> end;
-
         private int type { get; set; }
 
 
@@ -23,7 +23,7 @@ namespace Ex1_Maze
         /// Constructor for the Maze that recevies its sizes</summary>
         /// <param Name="height">Height of the Maze</param>
         /// <param Name="width">Width of the maze</param>
-        public Maze(int height, int width)
+        public _2DMaze(int height, int width)
         {
             this.height = height;
             this.width = width;
@@ -54,11 +54,15 @@ namespace Ex1_Maze
             SetEnd();
         }
 
+
         public void SetStart()
         {
             this.start = this.grid2D[0, new Random().Next(0, GetHeight() - 1)];
             this.start.SetValue(0);
+            this.Start.Row = this.start.GetRow();
+            this.Start.Col = this.start.GetCol();
         }
+
 
         public Node<T> getStart()
         {
@@ -70,6 +74,8 @@ namespace Ex1_Maze
         {
             this.end = this.grid2D[GetWidth() - 1, new Random().Next(0, GetHeight() - 1)];
             this.end.SetValue(0);
+            this.End.Row = this.end.GetRow();
+            this.End.Col = this.end.GetCol();
         }
 
         public Node<T> getEnd()
@@ -221,7 +227,6 @@ namespace Ex1_Maze
             }
             return ans;
         }
-
 
 
         public void SetSizesFromConfig(int h, int w)

@@ -33,6 +33,7 @@ namespace Ex1_Maze
             this.value = val;
         }
 
+
         public Node()
         {
             //this.i = i;
@@ -41,6 +42,8 @@ namespace Ex1_Maze
              this.cost = new Random().Next(0, 20);
            // this.value = val;
         }
+
+
         public Node(int value, int i, int j)
         {
             this.value = value;
@@ -53,31 +56,38 @@ namespace Ex1_Maze
         {
             return this.value;
         }
+
+
         public int GetCost()
         {
             return this.cost;
         }
+
 
         public int GetRow()
         {
             return this.i;
         }
 
+
         public int GetCol()
         {
             return this.j;
         }
+
 
         public Node<T> GetParent()
         {
             return this.parent;
         }
 
+
         public void SetValue(int v)
         {
             this.value = v;
-
         }
+
+
         public void SetParent(Node<T> s)
         {
             this.parent = s;
@@ -85,9 +95,6 @@ namespace Ex1_Maze
 
 
         public void SetCost(int cost)
-        {
-            this.cost = cost;
-        }
-
+        {this.cost = cost;}
     }
 }

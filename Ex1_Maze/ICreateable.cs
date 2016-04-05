@@ -9,8 +9,8 @@ namespace Ex1_Maze
     public interface ICreateable<T>
     {
         int GetHeight();
-        int GetWidth(); 
-        Maze<T> GetMaze();
+        int GetWidth();
+        GeneralMaze<T> GetMaze();
         Node<T> GetStartPoint();
         Node<T> GetEndPoint();
     }

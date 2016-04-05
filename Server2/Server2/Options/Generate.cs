@@ -40,7 +40,7 @@ namespace Server2.Options
             int height = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["HEIGHT"]);
             int width = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["WIDTH"]);
 
-            Maze<int> maze = new Maze<int>(height, width);
+            _2DMaze<int> maze = new _2DMaze<int>(height, width);
             GeneralMaze<int> cMaze = new GeneralMaze<int>(maze);
             cMaze.Generate(name, type);
             maze.MakeMazeString();

@@ -9,7 +9,7 @@ namespace Ex1_Maze
 {
     public interface ISearchable<T>
     {
-        Maze<T> GetMaze();
+        GeneralMaze<T> GetMaze();
         Node<T> getInitialState();
         Node<T> getGoalState();
         List<Node<T>> getAllPossibleStates(Node<T> n);

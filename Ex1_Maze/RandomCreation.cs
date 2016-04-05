@@ -10,7 +10,7 @@ namespace Ex1_Maze
     {
         private int height;
         private int width;
-        private Maze<T> maze;
+        private GeneralMaze<T> maze;
 
         //By prim algo
         public void create(ICreateable<T> createable)

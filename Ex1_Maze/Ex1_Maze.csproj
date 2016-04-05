@@ -58,12 +58,11 @@
     <Compile Include="ISearcher.cs" />
     <Compile Include="JPosition.cs" />
     <Compile Include="MainRunner.cs" />
-    <Compile Include="Maze.cs" />
+    <Compile Include="2DMaze.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomCreation.cs" />
-    <Compile Include="SearchableGrid.cs" />
     <Compile Include="Solution.cs" />
   </ItemGroup>
   <ItemGroup>

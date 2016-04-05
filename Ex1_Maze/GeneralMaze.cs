@@ -8,9 +8,9 @@ namespace Ex1_Maze
 {
     public class GeneralMaze<T> : ICreateable<T>, ISearchable<T>
     {
-        private Maze<T> maze;
+        private _2DMaze<T> maze;
 
-        public GeneralMaze(Maze<T> maze)
+        public GeneralMaze(_2DMaze<T> maze)
         {
             this.maze = maze;  
         }
@@ -42,6 +42,11 @@ namespace Ex1_Maze
             }
         }
 
+        public int GetValue(int row, int col)
+        {
+            return this.maze.GetValue(row, col);
+        }
+
         //- 0 for Breadth first and 1 for Best first
         public void Solve(string name, int type)
         {
@@ -65,9 +70,9 @@ namespace Ex1_Maze
             return this.maze.GetHeight();
         }
 
-        public Maze<T> GetMaze()
+        public GeneralMaze<T> GetMaze()
         {
-            return this.maze;
+            return this;
         }
 
         //returns the grid itself
@@ -138,9 +143,23 @@ namespace Ex1_Maze
             return (this.maze.getStart());
         }
 
+        public void SetCell(int row, int col, int v)
+        {
+
+            // Console.WriteLine("Row = {0}  Col ={1}", Row ,Col);
+            this.maze.SetCell(row, col, v);
+            //this.grid2D[i, j].SetValue(value);
+        
+    }
+
         public Node<T> getGoalState()
         {
             return (this.maze.getEnd());
+        }
+
+        public void Print()
+        {
+            this.maze.Print();
         }
     }
 }

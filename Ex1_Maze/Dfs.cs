@@ -9,7 +9,7 @@ namespace Ex1_Maze
     {
         private int height;
         private int width;
-        private Maze<T> maze;
+        private GeneralMaze<T> maze;
 
         public void create(ICreateable<T> createable)
         {
