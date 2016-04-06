@@ -36,7 +36,6 @@ namespace Ex1_Maze
             {
                 RandomCreation<T> randomMaze = new RandomCreation<T>();
                 randomMaze.create(this);
-                this.Print();
             }
         }
 

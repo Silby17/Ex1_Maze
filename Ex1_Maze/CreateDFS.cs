@@ -36,15 +36,11 @@ namespace Ex1_Maze
             Random rand = new Random();
             int row = rand.Next(0, HEIGHT);
             int col = rand.Next(0, WIDTH);
-            //int row = 0;
             maze.SetCell(row, col, 0);
             maze.SetStartPoints(row, col);
-            //maze.Print();
 
             //This will start createing the maze using recursion
             Recursion(row, col);
-
-            //maze.Print();
 
             //This will set the end points of the maze
             maze.SetEndPoints(endRow, endCol);
