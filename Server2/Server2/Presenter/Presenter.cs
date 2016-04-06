@@ -8,7 +8,7 @@ using System;
 
 namespace Server2
 {
-    public class ServerPresenter : IPresenter
+    public class Presenter : IPresenter
     {
         private IView view; //publisher
         private IModel model; //publisher
@@ -17,19 +17,19 @@ namespace Server2
         /// Constructor Method</summary>
         /// <param Name="v">The view for the Presenter</param>
         /// <param Name="m">The Model for the Presenter</param>
-        public ServerPresenter(IModel m)
-        {
-            this.model = m;
-            //Subscribe to events from the Model
-            model.newModelChange += this.OnEventHandler;
-        }
-
-        public void SetView(IView v)
+        public Presenter(IView v, IModel m)
         {
             this.view = v;
-            //Subscribe to events from the View
+            this.model = m;
+            
+            //Subscribe to events from the Model
+            model.newModelChange += this.OnEventHandler;
+
+            //Subscribe to events from view
             view.newInput += this.OnEventHandler;
         }
+
+       
 
 
         /// <summary>
@@ -73,6 +73,7 @@ namespace Server2
         public void HandleModelEvent()
         {
             string result = model.GetModelChange();
+            
             view.DisplayData(result);
         }
     }
