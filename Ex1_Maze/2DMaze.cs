@@ -45,7 +45,7 @@ namespace Ex1_Maze
             {
                 for (int j = 0; j < this.width; j++)
                 {
-                    this.grid2D[i, j] = new Node<T>(1, i, j);
+                    this.grid2D[i, j] = new Node<T>(i, j, 1);
                 }
             }
         }
