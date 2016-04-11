@@ -18,7 +18,10 @@ namespace Ex1_Maze
 
         public Solution<T> Search(ISearchable<T> searchable)
         {
-            Console.WriteLine("here0");
+            Console.WriteLine(searchable.GetMaze().GetStartPoint().GetRow()+"the start i: ");
+            Console.WriteLine(searchable.GetMaze().GetStartPoint().GetCol() + "the start j: ");
+            Console.WriteLine(searchable.GetMaze().GetEndPoint().GetRow() + "the end i: ");
+            Console.WriteLine(searchable.GetMaze().GetEndPoint().GetCol() + "the end j: ");
             this.closedList = new Solution<T>(new List<Node<T>>());
             this.openList = new Solution<T>(new List<Node<T>>());
             this.maze = searchable.GetMaze();
@@ -77,14 +80,15 @@ namespace Ex1_Maze
         {
             Solution<T>  resultList = new Solution<T>(new List<Node<T>>());
             //needs to go over all the states from goal to start and ask where did it "comefrom"
-            for (int i =this.closedList.GetLength() ;i != 0 ;i--)
-            {
-                resultList.AddSolution(this.closedList.GetList().ElementAt(i).GetParent());
-                int row = this.closedList.GetList().ElementAt(i).GetRow();
-                int col = this.closedList.GetList().ElementAt(i).GetCol();
+           
+           foreach(Node<T> n in this.closedList.GetList())
+           {
+                resultList.AddSolution(n.GetParent());
+                int row = n.GetRow();
+                int col = n.GetCol();
                 //changes value to 2 in maze and in closedlist
                 searchable.GetMaze().SetCell(row, col, 2);
-                this.closedList.GetList().ElementAt(i).SetValue(2);
+                n.SetValue(2);
                 Console.WriteLine("here1");
 
             }
@@ -118,7 +122,9 @@ namespace Ex1_Maze
                 if (s.GetCost() <= ans.GetCost())
                     ans = s;
             }
+            this.openList.GetList().Remove(ans);
             return ans;
+
         }
 
        

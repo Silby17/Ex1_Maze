@@ -48,7 +48,7 @@ namespace Ex1_Maze
         /// </summary>
         /// <param name="name">Name of the maze to be Solved</param>
         /// <param name="type">Algorithm type</param>
-        public void Solve(string name, int type)
+        public void Solve(int type)
         {
             if (1 == type) //BestFirst Search
             {
@@ -153,22 +153,23 @@ namespace Ex1_Maze
             int j = n.GetCol();
             Console.WriteLine("i: {0} j: {1}", i, j);
             // cheack up
-            if ((j > 0) &&(this.maze.GetValue(i, j - 1) != 1))
+            if ((j != 0) &&(this.maze.GetValue(i, j - 1) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i, j - 1));
             }
             //down
-            if ((j < GetHeight()) && (this.maze.GetValue(i, j + 1) != 1))
+
+            if ((j != GetHeight() - 1) && (this.maze.GetValue(i, j + 1) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i, j + 1));
             }
             //left
-            if ((i > 0) && (this.maze.GetValue(i - 1, j) != 1))
+            if ((i != 0) && (this.maze.GetValue(i - 1, j) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i - 1, j));
             }
             //right
-            if ((i < GetWidth()) && (this.maze.GetValue(i + 1, j) != 1))
+            if ((i != GetWidth() - 1) && (this.maze.GetValue(i + 1, j) != 1))
             {
                 possibleStates.Add(this.maze.GetNode(i + 1, j));
             }

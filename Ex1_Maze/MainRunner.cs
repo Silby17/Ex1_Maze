@@ -13,8 +13,8 @@ namespace Ex1_Maze
         {
             _2DMaze<int> maze = new _2DMaze<int>(5, 5);            
             GeneralMaze<int> Cm = new GeneralMaze<int>(maze);
-            Cm.Generate("mazushshsh", 0);
-           // Cm.Solve("nava", 1);
+            Cm.Generate("mazushshsh", 1);
+            Cm.Solve("nava", 1);
             maze.Print();
         }
     }
