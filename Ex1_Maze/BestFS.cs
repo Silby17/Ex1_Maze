@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Collections;
-using System.Threading.Tasks;
+
 
 namespace Ex1_Maze
 {
@@ -25,7 +23,7 @@ namespace Ex1_Maze
             this.openList = new Solution<T>(new List<Node<T>>());
             this.maze = searchable.GetMaze();
             // Searcher's abstract method overriding
-            addToOpenList(searchable.getInitialState());
+            addToOpenList(maze.GetStartPoint());
             // HashSet<State<T>> closed = new HashSet<State<T>>();
            
             while (this.openList.GetLength() != 0)
@@ -34,7 +32,7 @@ namespace Ex1_Maze
                 // inherited from Searcher, removes the best state
                 Node<T> bestState = popOpenList();
                 this.closedList.AddSolution(bestState);
-                if (bestState.Equals(searchable.getGoalState()))
+                if (bestState.Equals(maze.GetEndPoint()))
                     return backTrace(searchable); // private method, back traces through the parents
                 // calling the delegated method, returns a list of states with n as a parent
                 List<Node<T>> succerssors = searchable.getAllPossibleStates(bestState);

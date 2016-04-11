@@ -11,13 +11,13 @@ namespace Server2
         private Dictionary<string, ICommandable> options;
         public event NewModelChange newModelChange;
         private string dataFromModel;
-        private Dictionary<string, GeneralMaze<int>> gList;
+        private Dictionary<string, GeneralMaze<int>> MazeList;
         public int counter = 0;
         
 
         public Model()
         {
-            this.gList = new Dictionary<string, GeneralMaze<int>>();
+            this.MazeList = new Dictionary<string, GeneralMaze<int>>();
             this.options = new Dictionary<string, ICommandable>();
             CreateOptionsDictionary();
         }
@@ -69,7 +69,8 @@ namespace Server2
                 this.dataFromModel = g1.GetJSON();
                 //this.resultList.Add("1", g1.GetJSON());
                 
-                this.gList.Add(counter.ToString(), g1.GetGmaze());
+                this.MazeList.Add(counter.ToString(), g1.GetGmaze());
+                Console.WriteLine(MazeList.Count);
                 counter++;
                 PublishEvent();
             }

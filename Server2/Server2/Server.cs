@@ -8,8 +8,8 @@ namespace Server2
     public class Server
     {
         private int PORT;
-        private IView view;
-        private IPresenter presenter;
+        //private IView view;
+        //private IPresenter presenter;
         private IModel model;
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Server2
             this.model = new Model();
 
             //Creates new Presenter and passes it the Model
-            this.presenter = new ServerPresenter(model);
+            //this.presenter = new ServerPresenter(model);
         }
 
 
@@ -43,11 +43,14 @@ namespace Server2
             {
                 Socket client = newsock.Accept();
                 Console.WriteLine("Client# {0} accepted!", ++clientNum);
-                
+
                 //Create new view which will handle to Client
-                ServerView handler = new ServerView(client, clientNum);
-                this.presenter.SetView(handler);
-                Task.Factory.StartNew(handler.handle);
+                View clientHandler = new View(client, model);
+                Task.Factory.StartNew(clientHandler.handle);
+
+                //ServerView handler = new ServerView(client, clientNum);
+                //this.presenter.SetView(handler);
+                //Task.Factory.StartNew(handler.handle);
             }
         }
     }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ex1_Maze
 {
@@ -10,102 +8,139 @@ namespace Ex1_Maze
     {
         private _2DMaze<T> maze;
 
+        /// <summary>
+        /// This is the constructor Method
+        /// </summary>
+        /// <param name="maze">Gets a new 2D maze</param>
         public GeneralMaze(_2DMaze<T> maze)
         {
-            this.maze = maze;  
+            this.maze = maze;
         }
 
-        //[type] - 0 for random and 1 for DFS
+
+        /// <summary>
+        /// This function will generate the needed Maze
+        /// according to the algorithm defined as type</summary>
+        /// <param name="name">Name of the maze</param>
+        /// <param name="type">Algo used to create the maze</param>
         public void Generate(string name, int type)
         {
             this.maze.Generate(name, type);
+
             if (type == 1) //Create using DFS
             {
                 CreateDFS<T> DFSMaze = new CreateDFS<T>();
                 DFSMaze.create(this);
             }
-            //Random
-            else if (0 == type)
+            else if (0 == type) //Create using Random Prims Algorithm
             {
-                RandomCreation<T> R = new RandomCreation<T>();
-                Console.WriteLine("the s row: " + GetStartPoint().GetRow());
-                Console.WriteLine("the s col: " + GetStartPoint().GetCol());
-                Console.WriteLine("the e row: " + GetEndPoint().GetRow());
-                Console.WriteLine("the e col: " + GetEndPoint().GetCol());
-                R.create(new GeneralMaze<T>(this.maze));
+                RandomCreation<T> randomMaze = new RandomCreation<T>();
+                randomMaze.create(this);
             }
         }
 
-        public int GetValue(int row, int col)
-        {
-            return this.maze.GetValue(row, col);
-        }
 
-        //- 0 for Breadth first and 1 for Best first
+        /// <summary>
+        /// This method will solve the maze using the algorithm defined 
+        /// by the user.
+        /// 1 = BestFirst Search
+        /// 0 = BFS
+        /// </summary>
+        /// <param name="name">Name of the maze to be Solved</param>
+        /// <param name="type">Algorithm type</param>
         public void Solve(string name, int type)
         {
-            //Best first
-            if (1 == type)
+            if (1 == type) //BestFirst Search
             {
                 BestFS<T> B = new BestFS<T>();
                 B.Search(this);
             }
-            //Breadth first
-            if (0 == type)
+            if (0 == type) //BFS
             {
                 // BreadthFS<T> B = new BreadthFS<T>();
                 //B.Search(this);
             }
-
         }
+
+
+        /// <summary>
+        /// Returns the vale of the node at given Index</summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
+        /// <returns>Value of the node</returns>
+        public int GetValue(int row, int col)
+        {
+            return this.maze.GetValue(row, col);
+        }
+  
+
+        /// <summary>
+        /// Returns the height of the Maze </summary>
+        /// <returns>Maze height</returns>
         public int GetHeight()
         {
             return this.maze.GetHeight();
         }
 
-        public GeneralMaze<T> GetMaze()
-        {
-            return this;
-        }
 
-        //returns the grid itself
-        public Node<T>[,] GetGrid()
-        {
-            return this.maze.GetMaze();
-        }
-
+        /// <summary>
+        /// Returns the height of the Maze
+        /// </summary>
+        /// <returns>The Maze height</returns>
         public int GetWidth()
         {
             return this.maze.GetWidth();
         }
 
 
-        public Node<T> GetStartPoint()
+        /// <summary>
+        /// Returns the GeneralMaze itself</summary>
+        /// <returns>itself</returns>
+        public GeneralMaze<T> GetMaze()
+        { return this; }
+
+
+        /// <summary>
+        /// Returns a node at the given index </summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
+        /// <returns>The needed node</returns>
+        public Node<T> GetNode(int row, int col)
+        { return maze.GetNode(row, col); }
+
+        
+        /// <summary>
+        /// Returns the grid which is the 2D Array</summary>
+        /// <returns>The actual grid</returns>
+        public Node<T>[,] GetGrid()
         {
-            
-            return (this.maze.getStart());
+            return this.maze.GetMaze();
         }
 
+
+        /// <summary>
+        /// Returns the ending Node </summary>
+        /// <returns>Node</returns>
         public Node<T> GetEndPoint()
-        {
-            
-            return (this.maze.getEnd());
+        { return (this.maze.getEnd());}
 
-        }
 
+        /// <summary>
+        /// Sets the starting Point of the Maze </summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
         public void SetStartPoints(int row, int col)
-        {
-            maze.SetStartingCell(row, col);
-        }
+        { maze.SetStartingCell(row, col); }
 
+
+        /// <summary>
+        /// This sets the ending Point of the maze </summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
         public void SetEndPoints(int row, int col)
-        {
-            maze.SetEndingCell(row, col);
-        }
-
+        { maze.SetEndingCell(row, col); }
       
 
-    
         /// <summary>
         /// returns a list of all possibles moves
         /// </summary>
@@ -141,28 +176,30 @@ namespace Ex1_Maze
             return possibleStates;
         }
 
-        public Node<T> getInitialState()
+
+        /// <summary>
+        /// Gets the Starting Node </summary>
+        /// <returns>Starting Node</returns>
+        public Node<T> GetStartPoint()
         {
-            return (this.maze.getStart());
+            return this.maze.getStart();
         }
 
+
+        /// <summary>
+        /// Sets the value of the Given Cell</summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
+        /// <param name="v">Value to be set</param>
         public void SetCell(int row, int col, int v)
         {
-
-            // Console.WriteLine("Row = {0}  Col ={1}", Row ,Col);
             this.maze.SetCell(row, col, v);
-            //this.grid2D[i, j].SetValue(value);
-        
-    }
-
-        public Node<T> getGoalState()
-        {
-            return (this.maze.getEnd());
         }
 
+
+        /// <summary>
+        /// This will print out on the screen the maze</summary>
         public void Print()
-        {
-            this.maze.Print();
-        }
+        { this.maze.Print();}
     }
 }

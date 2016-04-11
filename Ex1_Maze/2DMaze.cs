@@ -45,47 +45,85 @@ namespace Ex1_Maze
             {
                 for (int j = 0; j < this.width; j++)
                 {
-                    this.grid2D[i, j] = new Node<T>(1, i, j);
+                    this.grid2D[i, j] = new Node<T>(i, j, 1);
                 }
             }
-            //sets the start and end
-            //SetStart();
-            //and end
-            //SetEnd();
         }
 
-
-        public void SetStart()
-        {
-            this.start = this.grid2D[0, new Random().Next(0, GetHeight() - 1)];
-            this.start.SetValue(0);
-            this.Start.Row = this.start.GetRow();
-            this.Start.Col = this.start.GetCol();
-        }
-
-
+       
+        /// <summary>
+        /// Returns the Starting Node </summary>
+        /// <returns>Starting Node</returns>
         public Node<T> getStart()
         {
             return this.start;
         }
 
-
-        public void SetEnd()
-        {
-            this.end = this.grid2D[GetWidth() - 1, new Random().Next(0, GetHeight() - 1)];
-            this.end.SetValue(0);
-            this.End.Row = this.end.GetRow();
-            this.End.Col = this.end.GetCol();
-        }
-
+       
+        /// <summary>
+        /// Returns the ending Node</summary>
+        /// <returns></returns>
         public Node<T> getEnd()
         {
             return this.end;
         }
 
+
+        /// <summary>
+        /// This will set the Value of a given cell </summary>
+        /// <param name="i">The Row Index</param>
+        /// <param name="j">The Col Index</param>
+        /// <param name="value">Value to be Set</param>
+        public void SetCell(int i, int j, int value)
+        {
+            this.grid2D[i, j].SetValue(value);
+        }
+
+
+        /// <summary>
+        /// This will set the starting cell </summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
+        public void SetStartingCell(int row, int col)
+        {
+            this.Start.Row = row;
+            this.Start.Col = col;
+            this.start = this.GetNode(row, col);
+        }
+
+
+        /// <summary>
+        /// Sets the ending Node </summary>
+        /// <param name="row">The Row index</param>
+        /// <param name="col">Col Index</param>
+        public void SetEndingCell(int row, int col)
+        {
+            this.End.Row = row;
+            this.End.Col = col;
+            this.end = this.GetNode(row, col);
+        }
+
+
+        /// <summary>
+        /// Returns node at the given index</summary>
+        /// <param name="i">Row index</param>
+        /// <param name="j">Col index</param>
+        /// <returns></returns>
         public Node<T> GetNode(int i, int j)
         {
             return (this.grid2D[i, j]);
+        }
+
+
+        /// <summary>
+        /// Sets the node at a given index to a given Node
+        /// </summary>
+        /// <param name="row">Row index</param>
+        /// <param name="col">Col index</param>
+        /// <param name="newNode">Node to be set</param>
+        public void SetNode(int row, int col , Node<T> newNode)
+        {
+            this.grid2D[row, col] = newNode;
         }
 
 
@@ -104,9 +142,9 @@ namespace Ex1_Maze
             }
         }
 
+
         /// <summary>
-        /// 
-        /// </summary>
+        /// Converts the Maze to a string</summary>
         public string MakeMazeString()
         {
             string mazeString = "";
@@ -122,59 +160,12 @@ namespace Ex1_Maze
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="maze"></param>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        public static void PrintMaze(Node<T>[,] maze, int row, int column)
-        {
-            for (int i = 0; i < row; i++)
-            {
-                for (int j = 0; j < column; j++)
-                {
-                    Console.Write(maze[i, j].GetValue());
-                }
-                Console.WriteLine();
-            }
-        }
-
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="i"></param>
-        /// <param name="j"></param>
-        /// <param name="value"></param>
-        public void SetCell(int i, int j, int value)
-        {
-            // Console.WriteLine("Row = {0}  Col ={1}", Row ,Col);
-            this.grid2D[i, j].SetValue(value);
-        }
-
-        public void SetStartingCell(int row, int col)
-        {
-            this.Start.Row = row;
-            this.Start.Col = col;
-            this.start = new Node<T>(row, col, 0, 0);
-            
-        }
-
-        public void SetEndingCell(int row, int col)
-        {
-            this.End.Row = row;
-            this.End.Col = col;
-            this.end = new Node<T>(row, col, 0, 0);
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="i"></param>
-        /// <param name="j"></param>
-        /// <returns></returns>
+        /// Gets the value of a node at the given index</summary>
+        /// <param name="i">Row index</param>
+        /// <param name="j">Col index</param>
+        /// <returns>Node Value</returns>
         public int GetValue(int i, int j)
         {
             return (this.grid2D[i, j].GetValue());
@@ -182,9 +173,9 @@ namespace Ex1_Maze
 
 
         /// <summary>
-        /// Returns the 
+        /// Returns the 2D Grid of nodes
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Maze of Nodes</returns>
         public Node<T>[,] GetMaze()
         {
             return this.grid2D;
@@ -208,7 +199,11 @@ namespace Ex1_Maze
             return this.width;
         }
 
-        //returns the index i of a cell
+
+        /// <summary>
+        /// Gets the Row index of a node of the given Value </summary>
+        /// <param name="val">Value of the node</param>
+        /// <returns>Row index</returns>
         public int GetIndexRow(int val)
         {
             int ans = 0;
@@ -226,7 +221,10 @@ namespace Ex1_Maze
         }
 
 
-        //returns the index j of a cell
+        /// <summary>
+        /// Gets the Col index of a node of the given value </summary>
+        /// <param name="val">The value of the node</param>
+        /// <returns>The Col index of the node</returns>
         public int GetIndexCol(int val)
         {
             int ans = 0;
@@ -241,13 +239,6 @@ namespace Ex1_Maze
                 }
             }
             return ans;
-        }
-
-
-        public void SetSizesFromConfig(int h, int w)
-        {
-            this.height = h;
-            this.width = w;
         }
     }
 }
