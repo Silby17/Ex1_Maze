@@ -7,6 +7,11 @@ namespace Ex1_Maze
     public class GeneralMaze<T> : ICreateable<T>, ISearchable<T>
     {
         private _2DMaze<T> maze;
+        public string Name { get; set; }
+        public string Maze { get; set; }
+        public JPosition Start { get; set; }
+        public JPosition End { get; set; }
+        private bool SOLVED = false;
 
         /// <summary>
         /// This is the constructor Method
@@ -15,6 +20,18 @@ namespace Ex1_Maze
         public GeneralMaze(_2DMaze<T> maze)
         {
             this.maze = maze;
+        }
+
+
+        /// <summary>
+        /// This Will update the memebrs of the class
+        /// for the JSON serilization </summary>
+        public void UpdateMembers()
+        {
+            this.Maze = this.maze.Maze;
+            this.Start = this.maze.Start;
+            this.End = this.maze.End;
+            this.Name = this.maze.Name;
         }
 
 
@@ -31,11 +48,15 @@ namespace Ex1_Maze
             {
                 CreateDFS<T> DFSMaze = new CreateDFS<T>();
                 DFSMaze.create(this);
+                MakeMazeString();
+                this.SOLVED = true;
             }
             else if (0 == type) //Create using Random Prims Algorithm
             {
                 RandomCreation<T> randomMaze = new RandomCreation<T>();
                 randomMaze.create(this);
+                MakeMazeString();
+                this.SOLVED = true;
             }
         }
 
@@ -52,10 +73,13 @@ namespace Ex1_Maze
         {
             if (1 == type) //BestFirst Search
             {
+                Console.WriteLine("In GM solving using Best");
                 BestFS<T> B = new BestFS<T>();
                 B.Search(this);
+                MakeMazeString();
+                UpdateMembers();
             }
-            if (0 == type) //BFS
+            else if (0 == type) //BFS
             {
                 // BreadthFS<T> B = new BreadthFS<T>();
                 //B.Search(this);
@@ -202,5 +226,25 @@ namespace Ex1_Maze
         /// This will print out on the screen the maze</summary>
         public void Print()
         { this.maze.Print();}
+
+
+        /// <summary>
+        /// Reutrns the maze String</summary>
+        /// <returns>Maze in format of string</returns>
+        public string GetMazeString()
+        { return this.maze.Maze; }
+
+
+        /// <summary>
+        /// Converts the maze into string form </summary>
+        public void MakeMazeString()
+        { this.maze.MakeMazeString(); }
+
+
+        /// <summary>
+        /// Checks if the Maze has been solved </summary>
+        /// <returns>False if not Solved and true if solved </returns>
+        public bool IsSolved()
+        { return this.SOLVED; }
     }
 }

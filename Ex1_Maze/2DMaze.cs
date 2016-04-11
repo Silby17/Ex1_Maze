@@ -145,7 +145,7 @@ namespace Ex1_Maze
 
         /// <summary>
         /// Converts the Maze to a string</summary>
-        public string MakeMazeString()
+        public void MakeMazeString()
         {
             string mazeString = "";
             for (int i = 0; i < this.height; i++)
@@ -156,7 +156,6 @@ namespace Ex1_Maze
                 }
             }
             this.Maze = mazeString;
-            return Maze;
         }
 
 
@@ -240,5 +239,6 @@ namespace Ex1_Maze
             }
             return ans;
         }
+
     }
 }

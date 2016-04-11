@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 
 namespace Ex1_Maze
@@ -18,10 +17,7 @@ namespace Ex1_Maze
 
         public Solution<T> Search(ISearchable<T> searchable)
         {
-            Console.WriteLine(searchable.GetMaze().GetStartPoint().GetRow()+"the start i: ");
-            Console.WriteLine(searchable.GetMaze().GetStartPoint().GetCol() + "the start j: ");
-            Console.WriteLine(searchable.GetMaze().GetEndPoint().GetRow() + "the end i: ");
-            Console.WriteLine(searchable.GetMaze().GetEndPoint().GetCol() + "the end j: ");
+
             this.closedList = new Solution<T>(new List<Node<T>>());
             this.openList = new Solution<T>(new List<Node<T>>());
             this.maze = searchable.GetMaze();
@@ -46,7 +42,6 @@ namespace Ex1_Maze
                     //evaluate it, add it to OPEN, and record its parent.
                     if (!this.closedList.Containe(s) && !this.openList.Containe(s))
                     {
-                        Console.WriteLine("inside IFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
                         s.SetCost(s.GetCost() + bestState.GetCost());
                         addToOpenList(s);
                         s.SetParent(bestState);
@@ -72,6 +67,7 @@ namespace Ex1_Maze
                     }
                 }
             }
+
            return(backTrace(searchable));
         }
 
@@ -125,8 +121,6 @@ namespace Ex1_Maze
             this.openList.GetList().Remove(ans);
             return ans;
 
-        }
-
-       
+        }       
     }
 }
