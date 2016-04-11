@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using Ex1_Maze;
+
 
 namespace Server2.Options
 {
@@ -14,17 +13,13 @@ namespace Server2.Options
 
 
         /// <summary>
-        /// Executes the Desired Functions
-        /// </summary>
-        /// <param name="args">List of params</param>
-        public void Execute(List<object> args)
+        /// Constructor Method that</summary>
+        /// <param name="args">Argumetns to be passed</param>
+        /// <param name="client">THe socket of the sender</param>
+        /// <param name="list">List of mazes if needed</param>
+        public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> list)
         {
-            Console.WriteLine("Option 5 was chosen");
-        }
-
-        public void Execute(List<object> args, Socket client)
-        {
-            throw new NotImplementedException();
+            this.clientToReturnTo = client;
         }
 
         /// <summary>

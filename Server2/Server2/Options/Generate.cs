@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
-using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Ex1_Maze;
@@ -25,10 +24,10 @@ namespace Server2.Options
         /// This method will convert the list to a string list
         /// and generate the maze with the correct Params</summary>
         /// <param Name="list">Object List of the Params</param>
-        public void Execute(List<object> list, Socket client)
+        public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList)
         {
             this.clientToReturnTo = client;
-            List<string> strings = list.Select(s => (string)s).ToList();
+            List<string> strings = args.Select(s => (string)s).ToList();
             string name = strings[1];
             int type = Int32.Parse(strings[2]);
             this.mazeName = name;
@@ -48,18 +47,18 @@ namespace Server2.Options
             _2DMaze<int> maze = new _2DMaze<int>(height, width);
             GeneralMaze<int> cMaze = new GeneralMaze<int>(maze);
             cMaze.Generate(name, type);
-            maze.MakeMazeString();
             this.gMa = cMaze;
-            //string jsonMaze = JsonConvert.SerializeObject(maze);
+            cMaze.UpdateMembers();
+
             JavaScriptSerializer ser = new JavaScriptSerializer();
-            string jsonMaze = ser.Serialize(maze);
+            string jsonMaze = ser.Serialize(cMaze);
             jsonMaze = JToken.Parse(jsonMaze).ToString();
-            
             File.WriteAllText(name+".json", jsonMaze);
-            //this.JSONMaze = JToken.Parse(jsonMaze).ToString();
+
             this.JSONMaze = jsonMaze;
             PublishEvent();
         }
+
 
         /// <summary>
         /// This method will publish an event that the maze
@@ -69,10 +68,17 @@ namespace Server2.Options
             if(execDone != null) { execDone(this, EventArgs.Empty); }
         }
 
+
+        /// <summary>
+        /// Retruns the JSON string</summary>
+        /// <returns>The Json String</returns>
         public string GetJSON()
         { return this.JSONMaze;}
 
 
+        /// <summary>
+        /// Returns the general Maze </summary>
+        /// <returns>The maze that has just been generated</returns>
         public GeneralMaze<int> GetGmaze() { return gMa; }
 
 
@@ -82,8 +88,12 @@ namespace Server2.Options
         public Socket GetClientSocket()
         { return this.clientToReturnTo; }
 
+
+
+        /// <summary>
+        /// Returns the name of the maze</summary>
+        /// <returns>Returns the name of the maze</returns>
         public string GetMazeName()
         { return this.mazeName; }
     }
-
 }
