@@ -10,7 +10,7 @@ namespace Server2
     public interface IPresenter
     {
         void OnEventHandler(object source, EventArgs e);
-        void HandleViewEvent();
-        void HandleModelEvent();
+        void HandleViewEvent(object src);
+        void HandleModelEvent(object src);
     }
 }

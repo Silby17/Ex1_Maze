@@ -47,10 +47,6 @@ namespace Server2
                 //Create new view which will handle to Client
                 View clientHandler = new View(client, model);
                 Task.Factory.StartNew(clientHandler.handle);
-
-                //ServerView handler = new ServerView(client, clientNum);
-                //this.presenter.SetView(handler);
-                //Task.Factory.StartNew(handler.handle);
             }
         }
     }

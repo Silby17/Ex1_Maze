@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Ex1_Maze;
+using System.Net.Sockets;
+using System.Text;
 
 namespace Server2
 {
@@ -14,7 +16,8 @@ namespace Server2
         private Dictionary<string, GeneralMaze<int>> MazeList;
         public int counter = 0;
         
-
+        /// <summary>
+        /// Constructor Method </summary>
         public Model()
         {
             this.MazeList = new Dictionary<string, GeneralMaze<int>>();
@@ -28,7 +31,7 @@ namespace Server2
         /// the presenter using the ICommandable dictionary</summary>
         /// <param Name="oList">Object List with info for executiing</param>
         /// <returns>A JSON format to be sent to client</returns>
-        public void ExecuteCommandalbe(List<object> oList)
+        public void ExecuteCommandalbe(List<object> oList, Socket client)
         {
             ICommandable value;
             List<string> strList = oList.Select(s => (string)s).ToList();
@@ -37,7 +40,7 @@ namespace Server2
             //Checks if the execution is correct 
             if (!options.TryGetValue(firstWord, out value))
             {
-                Console.WriteLine("404 option not found");
+                SendToClient("404 option not found", client);
             }
             //If there is no problem with the execution code, add to threadpool
             else
@@ -46,10 +49,24 @@ namespace Server2
                 ThreadPool.QueueUserWorkItem(new WaitCallback(
                     delegate (object state)
                     {
-                        options[firstWord].Execute(oList);
+                        options[firstWord].Execute(oList, client);
                         options[firstWord].execDone -= this.OnEventHandler;
                     }), null);
             }
+        }
+
+
+        /// <summary>
+        /// This method will be run on a seperate thread
+        /// and it will be in charge of sending data to the Client</summary>
+        /// <param name="str">The string to send to Client</param>
+
+        public void SendToClient(string msg, Socket client)
+        {
+            byte[] data = new byte[1024];
+            data = Encoding.ASCII.GetBytes(msg);
+            //Server sends welcome msg to Client
+            client.Send(data, data.Length, SocketFlags.None);
         }
 
 
@@ -63,20 +80,16 @@ namespace Server2
         {            
             if(source is Options.Generate)
             {
-                Console.WriteLine("Event received from Genrated");
                 Options.Generate g1 = (Options.Generate)source;
-                
                 this.dataFromModel = g1.GetJSON();
-                //this.resultList.Add("1", g1.GetJSON());
-                
-                this.MazeList.Add(counter.ToString(), g1.GetGmaze());
-                Console.WriteLine(MazeList.Count);
+                Socket clientToSendTo = g1.GetClientSocket();
+                this.MazeList.Add(g1.GetMazeName(), g1.GetGmaze());
+                SendToClient(this.dataFromModel, clientToSendTo);
                 counter++;
-                PublishEvent();
             }
-            if(source is Options.Solve)
+            else if(source is Options.Solve)
             {
-                Console.WriteLine("Received Event from Closed");                    
+                Console.WriteLine("Received Event from Solve");                    
             }
         }
 

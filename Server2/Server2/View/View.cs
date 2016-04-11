@@ -12,13 +12,7 @@ namespace Server2
         private IPresenter presenter;
         private IModel model;
         private Socket client;
-        private int ID;
-
-        public View(Socket client)
-        {
-            this.client = client;
-        }
-
+        
 
         /// <summary>
         /// Simple Constructor Method/// </summary>
@@ -30,6 +24,10 @@ namespace Server2
         }
     
 
+
+        /// <summary>
+        /// Mehtod that will be used to start the handleing of the Clients
+        /// it will also send a welcome msg to the client</summary>
         public void handle()
         {
             byte[] data = new byte[1024];
@@ -55,30 +53,18 @@ namespace Server2
                 if (recv == 0) break;
                 string str = Encoding.ASCII.GetString(data, 0, recv);
                 if (str.Equals("exit")) break;
-                OnNewInput(str);
+                OnNewInput(str, client);
             }
             client.Close();
         }
 
 
         /// <summary>
-        /// This method will be run on a seperate thread
-        /// and it will be in charge of sending data to the Client</summary>
-        /// <param name="str">The string to send to Client</param>
-        public void Send(string str)
-        {
-            byte[] data = new byte[1024];
-            data = Encoding.ASCII.GetBytes(str);
-            //Server sends welcome msg to Client
-            this.client.Send(data, data.Length, SocketFlags.None);
-        }
-
-        /// <summary>
         /// This function will run when there is a new input
         /// from the client that needs to be sent to the server
         /// </summary>
         /// <param Name="str">The input received</param>
-        public void OnNewInput(string str)
+        public void OnNewInput(string str, Socket client)
         {
             commandToSend = str;
             PublishEvent();
@@ -105,10 +91,10 @@ namespace Server2
         }
 
 
-        //Sends the data back to the client
-        public void DisplayData(string data)
-        {
-            Send(data);
-        }
+        /// <summary>
+        /// Returns the client details in socket format</summary>
+        /// <returns>The current Socket info</returns>
+        public Socket GetClient()
+        { return this.client; }
     }
 }
