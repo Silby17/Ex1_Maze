@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
 using System;
-
+using System.Net.Sockets;
 
 namespace Server2
 {
@@ -40,11 +40,11 @@ namespace Server2
         {
             if(source is IView)
             {
-                HandleViewEvent();
+                HandleViewEvent(source);
             }
             else if(source is IModel)
             {
-                HandleModelEvent();
+                HandleModelEvent(source);
             }
         }
 
@@ -52,29 +52,30 @@ namespace Server2
         /// <summary>
         /// This Function will get the data that the view wants to 
         /// send to the Presenter </summary>
-        public void HandleViewEvent()
+        public void HandleViewEvent(object src)
         {
+            IView v = (IView)src;
             //Gets the new string input from the Client
-            string newCommand = view.GetStringInput();
+            string newCommand = v.GetStringInput();
+            Socket client = v.GetClient();
             
             //Splits to a list of strings
             List<string> commandList = newCommand.Split(' ').ToList();
 
             //Splits to a list of objects for passing to thread pool
             List<object> ol = commandList.ConvertAll(s => (object)s);
-
-            this.model.ExecuteCommandalbe(ol);
+            
+            this.model.ExecuteCommandalbe(ol, client);
         }
 
+        
 
         /// <summary>
         /// This function will get the message from the Model to
-        /// send to the cliet in the JSOn format</summary>
-        public void HandleModelEvent()
+        /// send to the cliet in the JSON format</summary>
+        public void HandleModelEvent(object src)
         {
-            string result = model.GetModelChange();
-            
-            view.DisplayData(result);
+            throw new NotImplementedException();
         }
     }
 }

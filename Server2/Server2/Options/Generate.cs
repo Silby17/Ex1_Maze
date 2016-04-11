@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Ex1_Maze;
+using System.Net.Sockets;
 
 namespace Server2.Options
 {
@@ -14,7 +15,9 @@ namespace Server2.Options
         public event ExecutionDone execDone;
         private string maze;
         private string JSONMaze;
-        private GeneralMaze<int> gMa; 
+        private GeneralMaze<int> gMa;
+        private Socket clientToReturnTo;
+        private string mazeName;
 
 
         /// <summary>
@@ -22,13 +25,15 @@ namespace Server2.Options
         /// This method will convert the list to a string list
         /// and generate the maze with the correct Params</summary>
         /// <param Name="list">Object List of the Params</param>
-        public string Execute(List<object> list)
+        public void Execute(List<object> list, Socket client)
         {
+            this.clientToReturnTo = client;
             List<string> strings = list.Select(s => (string)s).ToList();
             string name = strings[1];
             int type = Int32.Parse(strings[2]);
+            this.mazeName = name;
             GenerateMaze(name, type);
-            return "stum";
+            
         }
 
 
@@ -69,6 +74,16 @@ namespace Server2.Options
 
 
         public GeneralMaze<int> GetGmaze() { return gMa; }
+
+
+        /// <summary>
+        /// Returns the Client socket that send the request</summary>
+        /// <returns>Clients Socket Details</returns>
+        public Socket GetClientSocket()
+        { return this.clientToReturnTo; }
+
+        public string GetMazeName()
+        { return this.mazeName; }
     }
 
 }

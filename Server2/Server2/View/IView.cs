@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Net.Sockets;
 
 namespace Server2
 {
@@ -8,9 +8,9 @@ namespace Server2
     public interface IView
     {
         event NewViewChangeEvent newInput;
-        void OnNewInput(string str);
-        void DisplayData(string data);
+        void OnNewInput(string str, Socket client);
         string GetStringInput();
-        void PublishEvent();      
+        Socket GetClient();
+        void PublishEvent();
     }
 }
