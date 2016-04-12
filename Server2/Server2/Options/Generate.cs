@@ -1,34 +1,34 @@
-﻿using System;
+﻿using System.Web.Script.Serialization;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.Script.Serialization;
-using Newtonsoft.Json;
-using System.IO;
 using Newtonsoft.Json.Linq;
-using Ex1_Maze;
 using System.Net.Sockets;
+using System.Linq;
+using System.IO;
+using Ex1_Maze;
+using System;
+
 
 namespace Server2.Options
 {
     public class Generate : ICommandable
     {
         public event ExecutionDone execDone;
-        private string maze;
         private string JSONMaze;
         private GeneralMaze<int> gMa;
         private Socket clientToReturnTo;
         private string mazeName;
 
-
+           
         /// <summary>
-        /// Receives a list object from the Model.
-        /// This method will convert the list to a string list
-        /// and generate the maze with the correct Params</summary>
-        /// <param Name="list">Object List of the Params</param>
-        public void Execute(List<object> list, Socket client)
+        /// Constructor Method that will get a list or arguments, the client that 
+        /// send the request and the List of Mazes if needed</summary>
+        /// <param name="args">List of arguments from client</param>
+        /// <param name="client">Socket of the sender</param>
+        /// <param name="mazeList">List of mazes</param>
+        public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList)
         {
             this.clientToReturnTo = client;
-            List<string> strings = list.Select(s => (string)s).ToList();
+            List<string> strings = args.Select(s => (string)s).ToList();
             string name = strings[1];
             int type = Int32.Parse(strings[2]);
             this.mazeName = name;
@@ -48,18 +48,17 @@ namespace Server2.Options
             _2DMaze<int> maze = new _2DMaze<int>(height, width);
             GeneralMaze<int> cMaze = new GeneralMaze<int>(maze);
             cMaze.Generate(name, type);
-            maze.MakeMazeString();
             this.gMa = cMaze;
-            //string jsonMaze = JsonConvert.SerializeObject(maze);
+
             JavaScriptSerializer ser = new JavaScriptSerializer();
-            string jsonMaze = ser.Serialize(maze);
+            string jsonMaze = ser.Serialize(cMaze);
             jsonMaze = JToken.Parse(jsonMaze).ToString();
-            
             File.WriteAllText(name+".json", jsonMaze);
-            //this.JSONMaze = JToken.Parse(jsonMaze).ToString();
+
             this.JSONMaze = jsonMaze;
             PublishEvent();
         }
+
 
         /// <summary>
         /// This method will publish an event that the maze
@@ -72,7 +71,9 @@ namespace Server2.Options
         public string GetJSON()
         { return this.JSONMaze;}
 
-
+        /// <summary>
+        /// Returns the General Maze</summary>
+        /// <returns>The Maze that was generated</returns>
         public GeneralMaze<int> GetGmaze() { return gMa; }
 
 
@@ -82,8 +83,11 @@ namespace Server2.Options
         public Socket GetClientSocket()
         { return this.clientToReturnTo; }
 
+
+        /// <summary>
+        /// Returns the Name of the maze</summary>
+        /// <returns>Gets the name of the Maze</returns>
         public string GetMazeName()
         { return this.mazeName; }
     }
-
 }
