@@ -11,8 +11,8 @@ namespace Ex1_Maze
         public JPosition End { get; set; }
 
 
-        private int height { get; set; }
-        private int width { get; set; }
+        public int height { get; set; }
+        public int width { get; set; }
         private Node<T>[,] grid2D;
         private Node<T> start;
         private Node<T> end;
@@ -30,6 +30,11 @@ namespace Ex1_Maze
             Start = new JPosition();
             End = new JPosition();
             this.grid2D = new Node<T>[height, width];
+        }
+
+        public _2DMaze() {
+            Start = new JPosition();
+            End = new JPosition();
         }
 
 
@@ -50,6 +55,11 @@ namespace Ex1_Maze
             }
         }
 
+
+        public void SetGrid(Node<T>[,] grid)
+        {
+            this.grid2D = grid;
+        }
        
         /// <summary>
         /// Returns the Starting Node </summary>
@@ -239,6 +249,5 @@ namespace Ex1_Maze
             }
             return ans;
         }
-
     }
 }
