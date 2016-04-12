@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Sockets;
+using Ex1_Maze;
+using System;
+
 
 namespace Server2
 {
@@ -9,8 +11,8 @@ namespace Server2
     public interface ICommandable
     {
         event ExecutionDone execDone;
-        void Execute(List<object> args, Socket client);
-        void PublishEvent();
+        void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList);
         Socket GetClientSocket();
+        void PublishEvent();
     }
 }
