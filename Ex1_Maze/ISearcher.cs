@@ -11,11 +11,11 @@ namespace Ex1_Maze
             // the search method
             Solution<T> Search(ISearchable<T> searchable);
             // get how many nodes were evaluated by the algorithm
-            int getNumberOfNodesEvaluated();
+           // int getNumberOfNodesEvaluated();
             //adds to the open list all the states that are in the list
-             void addToOpenList(List<Node<T>> list);
+           //  void addToOpenList(List<Node<T>> list);
             //pops the best state
-            Node<T> popOpenList();
+           // Node<T> popOpenList();
 
     } 
 }

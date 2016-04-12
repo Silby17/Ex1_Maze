@@ -18,10 +18,7 @@ namespace Ex1_Maze
 
         public Solution<T> Search(ISearchable<T> searchable)
         {
-            Console.WriteLine(searchable.GetMaze().GetStartPoint().GetRow()+"the start i: ");
-            Console.WriteLine(searchable.GetMaze().GetStartPoint().GetCol() + "the start j: ");
-            Console.WriteLine(searchable.GetMaze().GetEndPoint().GetRow() + "the end i: ");
-            Console.WriteLine(searchable.GetMaze().GetEndPoint().GetCol() + "the end j: ");
+          
             this.closedList = new Solution<T>(new List<Node<T>>());
             this.openList = new Solution<T>(new List<Node<T>>());
             this.maze = searchable.GetMaze();
@@ -31,7 +28,7 @@ namespace Ex1_Maze
            
             while (this.openList.GetLength() != 0)
             {
-                Console.WriteLine("Inside while");
+                
                 // inherited from Searcher, removes the best state
                 Node<T> bestState = popOpenList();
                 this.closedList.AddSolution(bestState);
@@ -41,12 +38,12 @@ namespace Ex1_Maze
                 List<Node<T>> succerssors = searchable.getAllPossibleStates(bestState);
                 foreach (Node<T> s in succerssors)
                 {
-                    Console.WriteLine("inside for each");
+                   
                     // If it is not in CLOSED and it is not in OPEN:
                     //evaluate it, add it to OPEN, and record its parent.
                     if (!this.closedList.Containe(s) && !this.openList.Containe(s))
                     {
-                        Console.WriteLine("inside IFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+                        
                         s.SetCost(s.GetCost() + bestState.GetCost());
                         addToOpenList(s);
                         s.SetParent(bestState);
@@ -89,7 +86,6 @@ namespace Ex1_Maze
                 //changes value to 2 in maze and in closedlist
                 searchable.GetMaze().SetCell(row, col, 2);
                 n.SetValue(2);
-                Console.WriteLine("here1");
 
             }
             return resultList;

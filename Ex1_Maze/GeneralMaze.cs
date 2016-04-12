@@ -57,8 +57,8 @@ namespace Ex1_Maze
             }
             if (0 == type) //BFS
             {
-                // BreadthFS<T> B = new BreadthFS<T>();
-                //B.Search(this);
+                 BreadthFS<T> B = new BreadthFS<T>();
+                B.Search(this);
             }
         }
 
