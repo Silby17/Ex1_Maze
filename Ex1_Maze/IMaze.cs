@@ -6,4 +6,4 @@ namespace Ex1_Maze
         Node<T> GetStartPoint();
         Node<T> GetEndPoint();
     }
-}
+}  
