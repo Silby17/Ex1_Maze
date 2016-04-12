@@ -49,7 +49,7 @@ namespace Server2
                 ThreadPool.QueueUserWorkItem(new WaitCallback(
                     delegate (object state)
                     {
-                        options[firstWord].Execute(oList, client);
+                        options[firstWord].Execute(oList, client, this.MazeList);
                         options[firstWord].execDone -= this.OnEventHandler;
                     }), null);
             }
@@ -89,7 +89,10 @@ namespace Server2
             }
             else if(source is Options.Solve)
             {
-                Console.WriteLine("Received Event from Solve");                    
+                Options.Solve s1 = (Options.Solve)source;
+                Socket clientToSend = s1.GetClientSocket();
+                string JSONResultToSend = s1.GetJSON();
+                SendToClient(JSONResultToSend, clientToSend);
             }
         }
 
