@@ -10,10 +10,11 @@ namespace Server2
 {
     public class Model : IModel
     {
+        private Dictionary<string, GeneralMaze<int>> MazeList;
         private Dictionary<string, ICommandable> options;
         public event NewModelChange newModelChange;
+        private List<Game> listOfGames;
         private string dataFromModel;
-        private Dictionary<string, GeneralMaze<int>> MazeList;
         public int counter = 0;
         
         /// <summary>
@@ -22,6 +23,7 @@ namespace Server2
         {
             this.MazeList = new Dictionary<string, GeneralMaze<int>>();
             this.options = new Dictionary<string, ICommandable>();
+            this.listOfGames = new List<Game>();
             CreateOptionsDictionary();
         }
 
@@ -33,10 +35,11 @@ namespace Server2
         /// <returns>A JSON format to be sent to client</returns>
         public void ExecuteCommandalbe(List<object> oList, Socket client)
         {
+            
             ICommandable value;
             List<string> strList = oList.Select(s => (string)s).ToList();
             string firstWord = strList[0];
-
+            if(firstWord == "3") oList.Add((object)listOfGames);
             //Checks if the execution is correct 
             if (!options.TryGetValue(firstWord, out value))
             {
@@ -93,6 +96,11 @@ namespace Server2
                 Socket clientToSend = s1.GetClientSocket();
                 string JSONResultToSend = s1.GetJSON();
                 SendToClient(JSONResultToSend, clientToSend);
+            }
+            else if(source is Options.Multiplayer)
+            {
+                Options.Multiplayer mp1 = (Options.Multiplayer)source;
+                
             }
         }
 
