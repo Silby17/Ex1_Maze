@@ -63,6 +63,7 @@ namespace Client
                 }
                 catch (SocketException e)
                 {
+                    Console.WriteLine(e.ToString());
                     Console.WriteLine("Connection with Server has been Terminated: Server Shut Down.");
                     server.Shutdown(SocketShutdown.Both);
                     server.Close();
