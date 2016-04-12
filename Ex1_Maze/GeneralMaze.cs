@@ -49,14 +49,14 @@ namespace Ex1_Maze
                 CreateDFS<T> DFSMaze = new CreateDFS<T>();
                 DFSMaze.create(this);
                 MakeMazeString();
-                this.SOLVED = true;
+                UpdateMembers();
             }
             else if (0 == type) //Create using Random Prims Algorithm
             {
                 RandomCreation<T> randomMaze = new RandomCreation<T>();
                 randomMaze.create(this);
                 MakeMazeString();
-                this.SOLVED = true;
+                UpdateMembers();
             }
         }
 
@@ -73,16 +73,19 @@ namespace Ex1_Maze
         {
             if (1 == type) //BestFirst Search
             {
-                Console.WriteLine("In GM solving using Best");
                 BestFS<T> B = new BestFS<T>();
                 B.Search(this);
                 MakeMazeString();
                 UpdateMembers();
+                SOLVED = true;
             }
             else if (0 == type) //BFS
             {
-                 BreadthFS<T> B = new BreadthFS<T>();
+                BreadthFS<T> B = new BreadthFS<T>();
                 B.Search(this);
+                MakeMazeString();
+                UpdateMembers();
+                SOLVED = true;
             }
         }
 
@@ -175,7 +178,6 @@ namespace Ex1_Maze
             List<Node<T>> possibleStates = new List<Node<T>>();
             int i = n.GetRow();
             int j = n.GetCol();
-            Console.WriteLine("i: {0} j: {1}", i, j);
             // cheack up
             if ((j != 0) &&(this.maze.GetValue(i, j - 1) != 1))
             {
