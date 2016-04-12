@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Ex1_Maze;
 
 namespace Server2.Options
 {
@@ -14,15 +15,12 @@ namespace Server2.Options
 
 
         /// <summary>
-        /// Executes the Desired Functions
-        /// </summary>
-        /// <param name="args">List of params</param>
-        public void Execute(List<object> args)
-        {
-            Console.WriteLine("Option 5 was chosen");
-        }
-
-        public void Execute(List<object> args, Socket client)
+        /// Constructor Method that will get a list or arguments, the client that 
+        /// send the request and the List of Mazes if needed</summary>
+        /// <param name="args">List of arguments from client</param>
+        /// <param name="client">Socket of the sender</param>
+        /// <param name="mazeList">List of mazes</param>
+        public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList)
         {
             throw new NotImplementedException();
         }

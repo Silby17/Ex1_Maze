@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using Ex1_Maze;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,20 +13,18 @@ namespace Server2.Options
         public event ExecutionDone execDone;
         private Socket clientToReturnTo;
 
+
         /// <summary>
-        /// This method will start the execution of the Multiplayer
-        /// game, and will recive the game name</summary>
-        /// <param name="args">Will hold the game name</param>
-        /// <returns></returns>
-        public void Execute(List<object> args)
+        /// Constructor Method that will get a list or arguments, the client that 
+        /// send the request and the List of Mazes if needed</summary>
+        /// <param name="args">List of arguments from client</param>
+        /// <param name="client">Socket of the sender</param>
+        /// <param name="mazeList">List of mazes</param>
+        public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList)
         {
+            this.clientToReturnTo = client;
             List<string> strParams = args.Select(s => (string)s).ToList();
             string gameName = strParams[1];
-        }
-
-        public string Execute(List<object> args, Socket client)
-        {
-            throw new NotImplementedException();
         }
 
 
@@ -36,10 +35,6 @@ namespace Server2.Options
             if (execDone != null) {execDone(this, EventArgs.Empty);}
         }
 
-        void ICommandable.Execute(List<object> args, Socket client)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Returns the Client socket that send the request</summary>

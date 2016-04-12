@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Ex1_Maze;
 
 namespace Server2.Options
 {
@@ -14,18 +15,16 @@ namespace Server2.Options
 
 
         /// <summary>
-        /// This method will execute the players move</summary>
-        /// <param name="args"></param>
-        public void Execute(List<object> args)
+        /// Constructor Method that will get a list or arguments, the client that 
+        /// send the request and the List of Mazes if needed</summary>
+        /// <param name="args">List of arguments from client</param>
+        /// <param name="client">Socket of the sender</param>
+        /// <param name="mazeList">List of mazes</param>
+        public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList)
         {
+            this.clientToReturnTo = client;
             List<string> strParams = args.Select(s => (string)s).ToList();
             string move = strParams[1];
-
-        }
-
-        public void Execute(List<object> args, Socket client)
-        {
-            throw new NotImplementedException();
         }
 
 
