@@ -41,7 +41,8 @@ namespace Server2
             ICommandable value;
             List<string> strList = oList.Select(s => (string)s).ToList();
             string firstWord = strList[0];
-            if(firstWord == "3" || firstWord == "4") oList.Add((object)listOfGames);
+            if (firstWord == "3" || firstWord == "4" || firstWord == "5")
+            { oList.Add((object)listOfGames); }
             //Checks if the execution is correct 
             if (!options.TryGetValue(firstWord, out value))
             {
@@ -119,6 +120,18 @@ namespace Server2
                 String json = ser.Serialize(play);
                 json = JToken.Parse(json).ToString();
                 SendToClient(json, client);
+            }
+            else if(source is Options.Close)
+            {
+                Options.Close close = (Options.Close)source;
+                Game CloseGame = close.GetGameToClose();
+                foreach (Player p in CloseGame.GetPlayersList())
+                {
+                    Socket client = p.GetPlayerSocket();
+                    string msg = "Game Has been terminated";
+                    SendToClient(msg, client);
+                }
+                listOfGames.Remove(CloseGame);
             }
         }
 
