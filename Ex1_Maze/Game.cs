@@ -32,15 +32,20 @@ namespace Ex1_Maze
         }
 
 
+        /// <summary>
+        /// Creates a second maze for the Second player
+        /// that has joined the game </summary>
         public void CreateSecondMaze()
         {
             Node<int>[,] grid = mazePlayer1.GetGrid();
             Node<int> start = mazePlayer1.GetStartPoint();
             Node<int> end = mazePlayer1.GetEndPoint();
+
             _2DMaze<int> twoDMaze = new _2DMaze<int>();
-            twoDMaze.CopyGrid(grid);
             twoDMaze.height = mazePlayer1.GetHeight();
             twoDMaze.width = mazePlayer1.GetWidth();
+            twoDMaze.CopyGrid(grid);
+            
             //Switches around the starting and ending cell in the Second Maze
             twoDMaze.SetStartingCell(end.GetRow(), end.GetCol());
             twoDMaze.SetEndingCell(start.GetRow(), start.GetCol());
@@ -48,7 +53,6 @@ namespace Ex1_Maze
             this.mazePlayer2.MakeMazeString();
             this.mazePlayer2.UpdateMembers();
             this.mazePlayer2.Name = this.mazePlayer1.Name + "_2";
-
         }
 
 

@@ -51,8 +51,15 @@ namespace Ex1_Maze
                 }
             }
         }
+
+
+        /// <summary>
+        /// This method will create a copy of the grid
+        /// passed as a parameter</summary>
+        /// <param name="grid">The grid that needs to be copied</param>
         public void CopyGrid(Node<int>[,] grid)
         {
+            this.grid2D = new Node<T>[width, height];
             for (int i = 0; i < this.height; i++)
             {
                 for (int j = 0; j < this.width; j++)
