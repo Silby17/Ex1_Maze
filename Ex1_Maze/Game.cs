@@ -13,8 +13,10 @@ namespace Ex1_Maze
 
         public List<Player> playersList;
         public List<GeneralMaze<int>> mazeList;
-        private Dictionary<GeneralMaze<int>, Player> playersAndMazes;
+        //private Dictionary<GeneralMaze<int>, Player> playersAndMazes;
         private string GameName;
+        public Player player1{get; set;}
+        public Player player2 { get; set; }
         private GeneralMaze<int> mazePlayer1;
         private GeneralMaze<int> mazePlayer2;
 
@@ -78,7 +80,7 @@ namespace Ex1_Maze
 
         public void AddPlayerAndMaze(GeneralMaze<int> maze, Player p)
         {
-            this.playersAndMazes.Add(maze, p);
+            //this.playersAndMazes.Add(maze, p);
         }
 
 
@@ -86,6 +88,20 @@ namespace Ex1_Maze
         public void SetMazePlayer2(GeneralMaze<int> maze)
         {
             this.mazePlayer2 = maze;
+        }
+
+
+        public GeneralMaze<int> GetPlayer1Maze()
+        { return this.mazePlayer1; }
+
+        public GeneralMaze<int> GetPlayer2Maze()
+        { return this.mazePlayer2; }
+
+
+        public void SetPlayers()
+        {
+            this.player1 = playersList[0];
+            this.player2 = playersList[1];
         }
     }
 }
