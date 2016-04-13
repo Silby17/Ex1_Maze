@@ -37,6 +37,31 @@ namespace Ex1_Maze
             End = new JPosition();
         }
 
+        public _2DMaze(_2DMaze<T> maze)
+        {
+            this.height = maze.GetHeight();
+            this.width = maze.GetWidth();
+            Start = new JPosition(maze.End.Row, maze.End.Col);
+            End = new JPosition(maze.Start.Row, maze.Start.Col);
+            for (int i = 0; i < this.height; i++)
+            {
+                for (int j = 0; j < this.width; j++)
+                {
+                    this.grid2D[i, j] = new Node<T>(i, j, maze.GetValue(i, j));
+                }
+            }
+        }
+        public void CopyGrid(Node<int>[,] grid)
+        {
+            for (int i = 0; i < this.height; i++)
+            {
+                for (int j = 0; j < this.width; j++)
+                {
+                    this.grid2D[i, j] = new Node<T>(i, j, grid[i,j].GetValue());
+                }
+            }
+        }
+
 
         /// <summary>
         /// Generates the maze with the given Parameters</summary>

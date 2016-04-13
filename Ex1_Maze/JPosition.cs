@@ -11,5 +11,12 @@ namespace Ex1_Maze
             public int Row { get; set; }
             [JsonProperty]
             public int Col { get; set; }
+
+        public JPosition(int row, int col)
+        {
+            this.Row = row;
+            this.Col = col;
+        }
+        public JPosition() { }
     }
 }

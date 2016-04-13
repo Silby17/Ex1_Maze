@@ -38,7 +38,7 @@ namespace Ex1_Maze
             Node<int> start = mazePlayer1.GetStartPoint();
             Node<int> end = mazePlayer1.GetEndPoint();
             _2DMaze<int> twoDMaze = new _2DMaze<int>();
-            twoDMaze.SetGrid(grid);
+            twoDMaze.CopyGrid(grid);
             twoDMaze.height = mazePlayer1.GetHeight();
             twoDMaze.width = mazePlayer1.GetWidth();
             //Switches around the starting and ending cell in the Second Maze
