@@ -5,6 +5,8 @@ using System.Threading;
 using Ex1_Maze;
 using System.Net.Sockets;
 using System.Text;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace Server2
 {
@@ -39,7 +41,7 @@ namespace Server2
             ICommandable value;
             List<string> strList = oList.Select(s => (string)s).ToList();
             string firstWord = strList[0];
-            if(firstWord == "3") oList.Add((object)listOfGames);
+            if(firstWord == "3" || firstWord == "4") oList.Add((object)listOfGames);
             //Checks if the execution is correct 
             if (!options.TryGetValue(firstWord, out value))
             {
@@ -80,8 +82,9 @@ namespace Server2
         /// <param name="sourse">The source of the event</param>
         /// <param name="args">Any event Arguments passed with the event</param>
         public void OnEventHandler(object source, EventArgs args)
-        {            
-            if(source is Options.Generate)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            if (source is Options.Generate)
             {
                 Options.Generate g1 = (Options.Generate)source;
                 this.dataFromModel = g1.GetJSON();
@@ -90,21 +93,40 @@ namespace Server2
                 SendToClient(this.dataFromModel, clientToSendTo);
                 counter++;
             }
-            else if(source is Options.Solve)
+            else if (source is Options.Solve)
             {
                 Options.Solve s1 = (Options.Solve)source;
                 Socket clientToSend = s1.GetClientSocket();
                 string JSONResultToSend = s1.GetJSON();
                 SendToClient(JSONResultToSend, clientToSend);
             }
-            else if(source is Options.Multiplayer)
+            else if (source is Options.Multiplayer)
             {
                 Options.Multiplayer mp1 = (Options.Multiplayer)source;
-                
+                Socket p1 = mp1.GetGameList()[0].GetPlayersList()[0].GetPlayerSocket();
+                Socket p2 = mp1.GetGameList()[0].GetPlayersList()[1].GetPlayerSocket();
+                string p1j = ser.Serialize(listOfGames[0].player1);
+                p1j =  JToken.Parse(p1j).ToString();
+                string p2j = ser.Serialize(listOfGames[0].player2);
+                p2j = JToken.Parse(p2j).ToString();
+                SendToClient(p1j, p1);
+                SendToClient(p2j, p2);
+            }
+            else if(source is Options.Play)
+            {
+                Options.Play play = (Options.Play)source;
+                Socket client = play.GetSocketToReturnTo();
+                String json = ser.Serialize(play);
+                json = JToken.Parse(json).ToString();
+                SendToClient(json, client);
             }
         }
 
 
+
+        /// <summary>
+        /// Returns a string if there when there is a model Change</summary>
+        /// <returns>the new model Info</returns>
         public string GetModelChange()
         {
             string toSend = this.dataFromModel;
@@ -114,13 +136,12 @@ namespace Server2
         }
 
 
-
+        /// <summary>
+        /// Publishes event to all subsribers</summary>
         public void PublishEvent()
         {
             if(newModelChange != null)
-            {
-                newModelChange(this, EventArgs.Empty);
-            }
+            { newModelChange(this, EventArgs.Empty);}
         }
 
 

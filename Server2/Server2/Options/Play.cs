@@ -10,8 +10,15 @@ namespace Server2.Options
 {
     public class Play : ICommandable
     {
+        public string Name { get; set; }
+        public string Move { get; set; }
+
         public event ExecutionDone execDone;
         private Socket clientToReturnTo;
+        private List<Game> listOfGames;
+        private Socket client;
+        private Player playerToReturnTo;
+        private Game currentGame;
 
 
         /// <summary>
@@ -22,9 +29,24 @@ namespace Server2.Options
         /// <param name="mazeList">List of mazes</param>
         public void Execute(List<object> args, Socket client, Dictionary<string, GeneralMaze<int>> mazeList)
         {
-            this.clientToReturnTo = client;
-            List<string> strParams = args.Select(s => (string)s).ToList();
-            string move = strParams[1];
+            this.client = client;
+            string move = (string)args[1];
+            this.Move = move;
+            this.listOfGames = (List<Game>)args[2];
+            this.currentGame = listOfGames[0];
+            this.Name = currentGame.GetGameName();
+            List<Player> listofPlayers = this.listOfGames[0].GetPlayersList();
+
+            foreach (Player p in listofPlayers)
+            {
+                if(p.GetPlayerSocket() == client)
+                {
+                    p.Move(move);
+                    this.playerToReturnTo = listOfGames[0].GetOtherPlayer(p);
+                    this.clientToReturnTo = playerToReturnTo.GetPlayerSocket();
+                    PublishEvent();
+                }
+            }           
         }
 
 
@@ -34,10 +56,21 @@ namespace Server2.Options
         {
             if (execDone != null) {execDone(this, EventArgs.Empty);}
         }
+
+
         /// <summary>
         /// Returns the Client socket that send the request</summary>
         /// <returns>Clients Socket Details</returns>
-        public Socket GetClientSocket()
+        public Socket GetSocketToReturnTo()
         { return this.clientToReturnTo; }
+
+
+        /// <summary>
+        /// Returns the clients Socket</summary>
+        /// <returns></returns>
+        public Socket GetClientSocket()
+        {
+            return null;
+        }
     }
 }
