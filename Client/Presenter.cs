@@ -11,6 +11,10 @@ namespace Client
         IModel model;
         IView view;
 
+
+
+        /// <summary>
+        /// Default Constructor</summary>
         public Presenter()
         {
             this.model = new Model();
@@ -19,6 +23,9 @@ namespace Client
             this.view.newInput += OnEventHandler;
         }
 
+
+        /// <summary>
+        /// Starts the running of the presenter</summary>
         public void Start()
         {
             this.model.Start();
@@ -26,6 +33,10 @@ namespace Client
         }
 
 
+        /// <summary>
+        /// Handels any event received</summary>
+        /// <param name="source">Sender of the event</param>
+        /// <param name="e">Any params from the event</param>
         public void OnEventHandler(object source, EventArgs e)
         {
             if (source is IModel)
@@ -39,7 +50,8 @@ namespace Client
         }
 
 
-
+        /// <summary>
+        /// Handled the events from the model</summary>
         public void HandleModelEvent()
         {
             string msg = this.model.GetMessageFromServer();
@@ -47,15 +59,12 @@ namespace Client
         }
 
 
-
+        /// <summary>
+        /// Handels the events from the view</summary>
         public void HandleViewEvent()
         {
             string msg = this.view.GetText();
             this.model.SendThread(msg);
         }
-
-
-
-
     }
 }

@@ -12,16 +12,23 @@ namespace Client
         public event NewViewChangeEvent newInput;
         private string toSend;
 
+
+        /// <summary>
+        /// Default Constructor</summary>
         public View()
-        {
+        {}
 
-        }
 
+        /// <summary>
+        /// Displays and text received on the screen</summary>
+        /// <param name="text">Text to be displayed</param>
         public void DisplayText(string text)
-        {
-            Console.WriteLine(text);
-        }
+        { Console.WriteLine(text); }
 
+
+
+        /// <summary>
+        /// Starts the Thread that will send to the server</summary>
         public void Start()
         {
             Thread sender = new Thread(SendThread);
@@ -29,6 +36,8 @@ namespace Client
         }
 
 
+        /// <summary>
+        /// Method that will send the commands to the server</summary>
         public void SendThread()
         {
             while (true)
@@ -49,7 +58,9 @@ namespace Client
         }
 
 
-
+        /// <summary>
+        /// Gets the test to send to the server</summary>
+        /// <returns>The test to send</returns>
         public string GetText()
         {
             string text = this.toSend;
@@ -58,14 +69,12 @@ namespace Client
         }
 
 
-
-
+        /// <summary>
+        /// Publishes events to any of its Subscribers</summary>
         public void PublishEvent()
         {
             if (newInput != null)
-            {
-                newInput(this, EventArgs.Empty);
-            }
+            { newInput(this, EventArgs.Empty);}
         }
     }
 }

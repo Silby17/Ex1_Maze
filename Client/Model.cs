@@ -22,6 +22,9 @@ namespace Client
 
         public event NewModelChange newModelChange;
 
+
+        /// <summary>
+        /// Constructor Method</summary>
         public Model()
         {
             //Reads the PORT and IP number from the Configuration file
@@ -75,12 +78,16 @@ namespace Client
             }
         }
 
+
+        /// <summary>
+        /// Disconnects the Client from the server</summary>
         public void Disconnect()
         {
             receiverThread.Abort();
             server.Shutdown(SocketShutdown.Both);
             server.Close();
         }
+
 
         /// <summary>
         /// This thread will be in charge of sending Data to the Server
@@ -96,9 +103,8 @@ namespace Client
         }
 
 
-
-
-
+        /// <summary>
+        /// Publishes and event when there is a change</summary>
         public void PublishEvent()
         {
             if (this.newModelChange != null)
@@ -108,7 +114,9 @@ namespace Client
         }
 
 
-
+        /// <summary>
+        /// Recevies the message from the Server</summary>
+        /// <returns>the masg</returns>
         public string GetMessageFromServer()
         {
             if (this.fromServer != "")
