@@ -5,8 +5,11 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            Client client = new Client();
-            client.StartClient();
+            Presenter presenter = new Presenter();
+            presenter.Start();
+
+//            Client client = new Client();
+  //          client.StartClient();
         }
     }
 }
