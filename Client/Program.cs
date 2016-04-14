@@ -7,9 +7,6 @@ namespace Client
         {
             Presenter presenter = new Presenter();
             presenter.Start();
-
-//            Client client = new Client();
-  //          client.StartClient();
         }
     }
 }
