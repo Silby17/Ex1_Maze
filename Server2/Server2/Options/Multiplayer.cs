@@ -27,8 +27,8 @@ namespace Server2.Options
         {
             this.ser = new JavaScriptSerializer();
             this.mazeList = mazeList;
-            SetSize();           
-            
+            SetSize();
+
             //Creates a new Player
             Player player = new Player(client);
 
@@ -40,11 +40,11 @@ namespace Server2.Options
             this.games = (List<Game>)args[2];
 
             //If the Games List is not empty
-            if(games.Count != 0)
+            if (games.Count != 0)
             {
-                foreach(Game g in games)
+                foreach (Game g in games)
                 {
-                    if(g.GetGameName() == gameName)
+                    if (g.GetGameName() == gameName)
                     {
                         //The Game already Exists in the list of games
 
@@ -53,22 +53,20 @@ namespace Server2.Options
                         g.CreateSecondMaze();
                         player.SetPlayerMaze(g.GetPlayer2Maze());
                         player.MazeName = player.GetPlayerMaze().Name;
-                        string you = ser.Serialize(player.GetPlayerMaze());
-                        player.You = JToken.Parse(you).ToString();
-                        string other = ser.Serialize(games[0].playersList[0].GetPlayerMaze());
-                        player.Other = JToken.Parse(other).ToString();
-                        games[0].playersList[0].Other = you;
+                        player.You = player.GetPlayerMaze();
+                        player.Other = games[0].playersList[0].GetPlayerMaze();
+                        games[0].playersList[0].Other = player.GetPlayerMaze();
                         g.SetPlayers();
-                        PublishEvent();                        
+                        PublishEvent();
                     }
                     else
                     //The current Game doesnt Exist
-                    {CreateNewGame(gameName, player); }
+                    { CreateNewGame(gameName, player); }
                 }
             }
             //Create a new Game if the game doesnt Exist
             else
-            { CreateNewGame(gameName, player);}
+            { CreateNewGame(gameName, player); }
         }
 
 
@@ -86,9 +84,7 @@ namespace Server2.Options
             games.Add(newGame);
             player.SetPlayerMaze(newMaze);
             player.MazeName = player.GetPlayerMaze().Name;
-            string you = ser.Serialize(player.GetPlayerMaze());
-            you = JToken.Parse(you).ToString();
-            player.You = you;
+            player.You = player.GetPlayerMaze();
         }
 
 
@@ -96,7 +92,7 @@ namespace Server2.Options
         /// This will publish an event to all its listeners</summary>
         public void PublishEvent()
         {
-            if (execDone != null) {execDone(this, EventArgs.Empty);}
+            if (execDone != null) { execDone(this, EventArgs.Empty); }
         }
 
 
@@ -118,7 +114,7 @@ namespace Server2.Options
             GeneralMaze<int> newGM = new GeneralMaze<int>(newMaze);
             Random rand = new Random();
             int type = rand.Next(0, 2);
-            string mazeName = name + "_1" + " " + type;
+            string mazeName = name + "_1";
             newGM.Generate(mazeName, type);
             return newGM;
         }
